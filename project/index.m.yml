@@ -27,8 +27,6 @@ project:
     - run: copy
       src: "{$ROOT_PATH}/project"
       dst: "{$BUILD_PATH}"
-    - run: bash
-      cmd: "npm install"
   target:
     serve:
       - run: bash
