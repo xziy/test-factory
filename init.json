@@ -1,5 +1,5 @@
 {
-  "unit": "layout1",
+  "unit": "test-factory/layout1",
   "description": "Базовая сборка, все по макету\n(без изменения цвета в компонентах)",
   "snippets": {
     "head": [
@@ -18,7 +18,7 @@
   },
   "inventory": {
     "contacts": {
-      "unit": "contacts1",
+      "unit": "test-factory/contacts1",
       "constant": {
         "variables": {
           "mail": " test@test.com",
@@ -29,16 +29,16 @@
       }
     },
     "dishcard": {
-      "unit": "dishcard2",
+      "unit": "test-factory/dishcard2",
       "constant": {},
       "style": "foto-padding"
     },
     "footer": {
-      "unit": "footer1",
+      "unit": "test-factory/footer1",
       "constant": {}
     },
     "header": {
-      "unit": "header1",
+      "unit": "test-factory/header1",
       "constant": {
         "states": {
           "logo": "logo-square+logo-rectangle",
@@ -56,7 +56,7 @@
       }
     },
     "promotions": {
-      "unit": "promotions1",
+      "unit": "test-factory/promotions1",
       "constant": {
         "states": {
           "animation": "diffusion",
