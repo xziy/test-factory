@@ -1,0 +1,12 @@
+{
+  "textAboutCookie": "Мы используем cookie, чтобы персонализировать ваш опыт с сайтом.",
+  "hiddenHeader": false,
+  "hiddenPromotions": false,
+  "hiddenDishNavBar": false,
+  "hiddenReview": false,
+  "hiddenContacts": false,
+  "hiddenFooter": false,
+  "enableCartPanel": true,
+  "enableFastOrder": false,
+  "dishcardAlign": "center"
+}

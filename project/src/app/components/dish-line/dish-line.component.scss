@@ -1,0 +1,245 @@
+@import "./colors";
+
+:host {
+  display: block;
+}
+
+.dish-line-container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+
+  @media (max-width: 765px) {
+    align-items: flex-start;
+  }
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+
+  @media (max-width: 765px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__foto {
+    width: 80px;
+    min-width: 80px;
+    height: 80px;
+    margin-right: 1rem;
+    img {
+      width: 80px;
+      min-width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: $global-border-radius-factor;
+    }
+    .alternateLine & {
+      width: 80px;
+      height: 80px;
+      img {
+        width: 80px;
+        height: 80px;
+      }
+    }
+  }
+
+  &__name {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+
+    .alternateLine & {
+      flex-direction: column;
+      min-width: 148px;
+      margin-right: 15px;
+    }
+
+    &-title {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: flex-start;
+      @media (max-width: 765px) {
+        justify-content: space-between;
+      }
+    }
+
+    @media (max-width: 765px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .page-text {
+      width: 100%;
+      .alternateLine & {
+        max-width: 100%;
+      }
+      @media (max-width: 765px) {
+        max-width: 100%;
+      }
+    }
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    .alternateLine & {
+      margin-right: 0;
+    }
+    @media (max-width: 765px) {
+      margin-right: 0;
+    }
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    @media (max-width: 765px) {
+      box-sizing: border-box;
+      margin-top: 18px;
+      margin-left: auto;
+      width: 100%;
+      app-dish-control {
+        width: 100%;
+        @media (max-width: 575px) {
+          margin-top: -1rem;
+          margin-bottom: -0.5rem;
+        }
+      }
+    }
+    .page-name {
+      width: 100% !important;
+      margin-left: 83px;
+      white-space: nowrap;
+    }
+  }
+  &__group {
+    display: flex;
+    align-items: center;
+    &--checkbox {
+      margin-right: 10px;
+      @media (max-width: 765px) {
+        width: 100%;
+      }
+    }
+  }
+  &__modal {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+  }
+  &__modal-text {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: $primary-color;
+    margin-top: 6px;
+
+    &:first-child {
+      margin-right: 1.0625rem;
+    }
+  }
+}
+
+/* text styles */
+.page-name {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  color: $primary-text-color;
+}
+
+.page-text {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: $secondary-text-color;
+  span {
+    font-weight: 700;
+    color: $primary-text-color;
+    margin-left: 10px;
+    white-space: nowrap;
+  }
+  .alternateLine & {
+    color: $primary-color;
+  }
+
+  &--info {
+    color: $primary-text-color;
+    margin-top: 32px;
+    margin-bottom: 26px;
+  }
+  &--bold {
+    font-weight: 700;
+    color: $primary-text-color;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    min-width: 160px;
+    max-width: 160px;
+  }
+  &--weight {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    margin-top: 6px;
+  }
+}
+
+.cart-modal__dish-control {
+  @media (max-width: 765px) {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+button.cart__close {
+  transition: 0.2s;
+  @media (max-width: 765px) {
+    margin-left: 0;
+  }
+  mat-icon {
+    width: 0.75rem;
+    height: 1rem;
+    transition: 0.2s;
+    fill: $minor-color;
+    .alternateLine & {
+      fill: $primary-color;
+    }
+  }
+  
+  &:hover {
+    mat-icon {
+      fill: $icon-color;
+      .alternateLine & {
+        fill: $primary-color;
+        fill-opacity: 0.5;
+      }
+    }
+  }
+}
+
+app-calories-info {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.cart__full-price {
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  color: $primary-text-color;
+  white-space: nowrap;
+  width: 100px;
+  text-align: center;
+  @media (max-width: 765px) {
+    display: none;
+  }
+}

@@ -1,0 +1,13 @@
+:host {
+  display: block;
+}
+
+.stock-page {
+  min-height: 63vh;
+  .stock_inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

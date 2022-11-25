@@ -1,0 +1,54 @@
+<h3 mat-dialog-title>
+  <button mat-icon-button class="cart-modal__close" mat-dialog-close>
+    <mat-icon svgIcon="app-close"></mat-icon>
+  </button>
+</h3>
+<mat-dialog-content>
+  <div class="cart-modal__header">
+    <div class="cart-modal__foto">
+      <img *ngIf="dishImageSrc() as imageSrc" [src]="imageSrc" (error)="errImg()" alt="" loading='lazy' width="100%"
+        height="100%">
+    </div>
+    <div class="cart-modal__info">
+      <div class="page-name">{{data.dish.name}}</div>
+      <div class="page-text" *ngIf="data.dish.description">{{data.dish.description}}</div>
+      <div class="page-text page-text--info" *ngIf="data.dish.additionalInfo">{{data.dish.additionalInfo}}</div>
+      <div class="cart-modal__nav" *ngIf="typeModifiers && typeModifiers.length > 0">
+        <button mat-button *ngFor="let modifierForm of typeModifiers;trackBy:trackByFn" class="cart-modal__btn"
+          (click)="selectTypeModifier(modifierForm.value)" type="button"
+          [class]="isSelected(modifierForm.value) ? ' cart-modal__btn--active' : ''">{{modifierForm.value.dish.name}}</button>
+      </div>
+    </div>
+  </div>
+  <div class="cart-modal__form">
+    <ng-container *ngFor="let groupModifier of modifiersForms">
+      <div class="page-name" *ngIf="groupModifier.value?.group?.name">{{groupModifier.value.group.name}}</div>
+      <div class="page-text">{{getGroupModifierTitleSelectText(groupModifier.value) }}</div>
+      <div class="cart-modal__items">
+        <div class="cart-modal__item" *ngFor="let child of getChildModifierform(groupModifier)"
+          [class]="getDishLineClass(child) |async">
+          <app-dish-line [isLoading]="data.isLoading" [modifierForm]="child" [dish]="child.value.dish"
+            [useSmallCheckbox]="config.useSmallCheckbox"></app-dish-line>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="modal-actions">
+  <ng-container *ngIf="_form.invalid && _form.errors && _form.dirty">
+    <mat-error class="mb-1">Ошибка.</mat-error>
+    <mat-error *ngFor="let error of _form.errors |keyvalue">
+      <span>{{error.key}}</span> - <span>{{error.value}}</span>
+    </mat-error>
+  </ng-container>
+  <div class="cart-modal__total">
+    <div class="page-name">{{dishTotalPrice | wrstCurrency}}</div>
+    <button [disabled]="_form.invalid" mat-button *ngIf="order$ |async as cart" (click)="addToCart()"
+      class="btn-primary">
+      Добавить
+      <span>{{dishTotalPrice | wrstCurrency}}</span>
+    </button>
+  </div>
+
+</mat-dialog-actions>
+<span *ngIf="updateWidth$ |async"></span>

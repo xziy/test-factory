@@ -1,0 +1,12 @@
+<section class="cookies_section">
+  <div class="cookies_wrapper">
+    <div class="cookies__icon">
+      <mat-icon svgIcon="app-cookie"></mat-icon>
+    </div>
+    <div class="cookies__text">{{textAboutCookie}}</div>
+    <div class="cookies__nav">
+      <button class="cookies__accept" mat-button disableRipple (click)="closeInfo()">Принять</button>
+      <button class="cookies__reject" mat-button disableRipple (click)="closeInfo()">Отклонить</button>
+    </div>
+  </div>
+</section>

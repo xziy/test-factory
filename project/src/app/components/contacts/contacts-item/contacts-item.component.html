@@ -1,0 +1,13 @@
+<div class="contacts__item" *ngIf="item">
+  <div class="contacts__icon" [ngSwitch]="true">
+    <mat-icon *ngSwitchCase="!!item.iconName">{{item.iconName}}</mat-icon>
+    <mat-icon *ngSwitchCase="!!item.iconSvgName" [svgIcon]="item.iconSvgName!"></mat-icon>
+  </div>
+  <div class="contacts__text">
+    <div class="page-name">{{item?.name ?? ''}}</div>
+    <div class="page-text" *ngIf="item?.name !== 'Телефон';else phoneTemplate">{{item?.text ?? ''}}</div>
+    <ng-template #phoneTemplate>
+      <a class="page-text" *ngIf="item?.text" [href]="'tel:'+item.text">{{item.text}}</a>
+    </ng-template>
+  </div>
+</div>

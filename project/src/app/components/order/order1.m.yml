@@ -1,0 +1,47 @@
+unit:
+  version: 1
+  type: order
+  author: webresto
+  name: order
+  slug: order1
+  description: Страница с информацией о сделанном заказе
+  group: order
+  shareable: false
+  postActions: true
+  componentPrefix: order.component
+  layout:
+    - base
+    - mobile
+component:
+  constant:
+    cssVariables:
+      - key: primary-color
+        value: $primary-color
+        description: ""
+        name: primary-color
+      - key: secondary-color
+        value: $secondary-color
+        description: ""
+        name: secondary-color
+      - key: minor-color
+        value: $minor-color
+        description: ""
+        name: minor-color
+      - key: primary-text-color
+        value: $primary-text-color
+        description: ""
+        name: primary-text-color
+      - key: secondary-text-color
+        value: $secondary-text-color
+        description: ""
+        name: secondary-text-color
+      - key: global-border-radius-factor
+        value: $global-border-radius-factor
+        description: Радиус для закругления углов
+        name: global-border-radius-factor
+      - key: background-order
+        value: $background-order
+        description: " "
+        name: background-order
+    variables: []
+    states: []

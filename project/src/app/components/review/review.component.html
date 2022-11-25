@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="reviews__title" [class]="config.singleReview ? ' title-center' : ''">
+    <div class="page-title">Отзывы</div>
+    <div class="reviews__rating" *ngIf="!config.singleReview">
+      <div class="page-text">{{middleRate$ |async}}/5</div>
+      <div class="reviews__stars">
+        <mat-icon *ngFor="let star of [0,1,2,3,4]; trackBy:trackByFn"
+          [class]="star < (middleRate$|async)! ? 'reviews__star--orange' : 'reviews__star'" svgIcon="app-star">
+        </mat-icon>
+      </div>
+    </div>
+  </div>
+  <owl-carousel-o [options]="customOptions" *ngIf="reviewsData$ |async as reviewsData">
+    <ng-container *ngFor="let slide of reviewsData;trackBy:trackByFn">
+      <ng-template carouselSlide [id]="slide.id!">
+        <app-review-item [item]="slide" [singleReview]="config.singleReview">
+          <ng-container ngProjectAs="prev">
+            <button mat-icon-button class="reviews__arrow mr-4" *ngIf="config.nav && config.singleReview"
+              (click)="moveCarousel('prev')">
+              <mat-icon svgIcon="app-arrow-prev"></mat-icon>
+            </button>
+          </ng-container>
+          <ng-container ngProjectAs="next">
+            <button mat-icon-button class="reviews__arrow ml-4" *ngIf="config.nav && config.singleReview"
+              (click)="moveCarousel('next')">
+              <mat-icon svgIcon="app-arrow-next"></mat-icon>
+            </button>
+          </ng-container>
+        </app-review-item>
+      </ng-template>
+    </ng-container>
+  </owl-carousel-o>
+  <div class="reviews__nav">
+    <div class="reviews__arrows" *ngIf="config.nav && !config.singleReview">
+      <button mat-icon-button (click)="moveCarousel('prev')">
+        <mat-icon svgIcon="app-arrow-prev"></mat-icon>
+      </button>
+      <button mat-icon-button (click)="moveCarousel('next')">
+        <mat-icon svgIcon="app-arrow-next"></mat-icon>
+      </button>
+    </div>
+    <div class="reviews__btn">
+      <button mat-button (click)="writeFeedback()">Написать отзыв</button>
+    </div>
+  </div>
+</div>
+
+<span *ngIf="writeFeedbackBus$ |async"></span>

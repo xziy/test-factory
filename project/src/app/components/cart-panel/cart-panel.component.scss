@@ -1,0 +1,135 @@
+@import "./colors";
+
+:host {
+  display: block;
+  position: sticky;
+  top: 144px;
+  max-width: 29.25rem;
+}
+
+mat-label.page-text {
+  color: $primary-text-color;
+}
+
+.cart {
+  width: 100%;
+  background-color: $secondary-color;
+  padding-top: 60px;
+  padding-left: 32px;
+  padding-right: 36px;
+  padding-bottom: 35px;
+  box-sizing: border-box;
+  animation: 0.5s ease-in-out 0s fadeIn;
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+  }
+  &__title {
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 2.25rem;
+    color: $primary-text-color;
+    margin-bottom: 26px;
+  }
+  &__total {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  &__wrap {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 1rem;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    span {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      font-weight: 400;
+      color: $primary-text-color;
+      &:first-child {
+        width: 75px;
+        min-width: 75px;
+        text-align: end;
+      }
+      &:last-child {
+        text-align: end;
+        margin-left: 39px;
+        white-space: nowrap;
+        font-weight: 700;
+        width: 100%;
+      }
+    }
+  }
+  &__wrap-inner {
+    display: flex;
+    flex-direction: column;
+  }
+  &__form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+  &__form-wrap {
+    display: flex;
+    align-items: flex-end;
+  }
+  &__input-wrap {
+    width: 50%;
+    .mat-form-field {
+      width: 100%;
+    }
+    &:first-child {
+      margin-right: 12px;
+    }
+  }
+  &__input {
+    font-size: 1rem;
+    color: $primary-text-color !important;
+    opacity: 1;
+    &::placeholder {
+      color: rgba($primary-text-color, 0.6);
+    }
+  }
+  &__textarea {
+    .mat-form-field {
+      width: 100%;
+    }
+    textarea {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      color: $primary-text-color;
+      resize: none;
+      height: 24px;
+      &::placeholder {
+        color: rgba($primary-text-color, 0.6);
+      }
+    }
+  }
+  &__prefix {
+    display: flex;
+    color: rgba($primary-text-color, 0.6);
+  }
+}
+
+.btn-primary {
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  color: $secondary-color;
+  padding: 0 21px;
+  height: 38px;
+  border-radius: 4px;
+  background-color: $primary-text-color;
+  transition: 0.2s;
+  margin-top: 22px;
+  &:hover {
+    background-color: rgba($primary-text-color, 0.8);
+  }
+  &:disabled {
+    background-color: rgba($primary-text-color, 0.4);
+  }
+}

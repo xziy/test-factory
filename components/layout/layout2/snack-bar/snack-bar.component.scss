@@ -1,0 +1,41 @@
+:host {
+  display: block;
+}
+
+.flexDelimeter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  animation: 0.4s ease-in 0s fadeInTop;
+
+  .message-block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &.success-snack {
+    background: #90af91;
+  }
+
+  &.error-snack {
+    background: #d55749;
+  }
+
+  mat-icon {
+    width: 0.9375rem;
+    height: auto;
+  }
+}
+
+.page-name {
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+}
+
+.page-text {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}

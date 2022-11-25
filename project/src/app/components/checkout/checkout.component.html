@@ -1,0 +1,258 @@
+<div class="checkout">
+  <div class="container" *ngIf="cartForm$ |async as orderForm" [formGroup]="orderForm"
+    (change)="updateCartForm(orderForm)">
+    <div class="checkout__inner">
+      <div class="page-title">Оформление заказа</div>
+      <div class="checkout__form">
+        <div class="checkout__wrap checkout__wrap--mb27" formGroupName="customer">
+          <div class="section-input">
+            <div class="section-input__field">
+              <mat-form-field appearance="standard" color="primary">
+                <mat-label>Имя и Фамилия</mat-label>
+                <input class="section-input__item" matInput formControlName="name">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="section-input">
+            <div class="section-input__field">
+              <mat-form-field appearance="standard" color="primary">
+                <mat-label>Ваш телефон</mat-label>
+                <input class="section-input__item" matInput type="tel" formControlName="phone">
+                <span matPrefix>+7 &nbsp;</span>
+                <button mat-icon-button matSuffix>
+                  <mat-icon svgIcon="app-i" [inline]="true"></mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="checkout__input checkout--mobile">
+          <div class="page-name">Доставка</div>
+          <div class="section-input section-input--select">
+            <span>Выберите способ доставки</span>
+            <div class="section-input__field">
+              <mat-form-field appearance="standard" color="primary">
+                <mat-select disableRipple formControlName="selfService" (change)="updateCartForm(orderForm)">
+                  <mat-option *ngFor="let type of delieveryTypes$|async; trackBy:trackByFn" [value]="type.value">
+                    {{type.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="checkout__input checkout--mobile" *ngIf="orderForm.value.selfService">
+          <div class="page-name">Адрес ресторана</div>
+          <div class="section-input section-input--select">
+            <span>Выберите адрес ресторана</span>
+            <div class="section-input__field">
+              <mat-form-field appearance="standard" color="primary">
+                <mat-select disableRipple formControlName="pickupAddressId" (change)="updateCartForm(orderForm)">
+                  <mat-option *ngFor="let point of pickupPoints$ |async; trackBy:trackByFn" [value]="point.id">
+                    {{point.address}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="checkout__wrap checkout__wrap--column checkout__delivery">
+          <div class="page-name">Доставка</div>
+          <div class="section-radio">
+            <mat-radio-group color="primary" formControlName="selfService" aria-label="Select an option"
+              (change)="updateCartForm(orderForm)">
+              <mat-radio-button *ngFor="let type of delieveryTypes$|async; trackBy:trackByFn" [value]="type.value">
+                {{type.name}}
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="checkout-field" formGroupName="address" *ngIf="!orderForm.value.selfService">
+          <div class="page-name">Адрес
+            <button class="checkout-btn" mat-icon-button>
+              <mat-icon svgIcon="app-i"></mat-icon>
+            </button>
+          </div>
+          <div class="checkout-field__wrap">
+            <div class="section-input">
+              <div class="section-input__field">
+                <mat-form-field appearance="standard" color="primary">
+                  <mat-label>Улица</mat-label>
+                  <input type="search" class="section-input__item" matInput #streetInput matAutocompleteOrigin
+                    (keydown)="keyPress$.next(streetInput.value)" formControlName="street" [matAutocomplete]="auto"
+                    matAutocompletePosition="below" (change)="clearIdWhenClearStreet(orderForm)">
+                  <mat-hint>Выберите из списка. Для поиска начните ввод</mat-hint>
+                  <button mat-icon-button matSuffix>
+                    <mat-icon svgIcon="app-search" [inline]="true"></mat-icon>
+                  </button>
+                  <mat-autocomplete #auto="matAutocomplete" [autoActiveFirstOption]="true">
+                    <mat-option (onSelectionChange)="optionAutoCompleteSelected(street.id,orderForm)"
+                      *ngFor="let street of filteredStreets$ |async;trackBy:trackByFn" [value]="street.name">
+                      {{street.name}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="section-input">
+              <div class="section-input__field">
+                <mat-form-field appearance="standard" color="primary">
+                  <mat-label>Дом</mat-label>
+                  <input class="section-input__item" matInput formControlName="home">
+                  <button mat-icon-button matSuffix>
+                    <mat-icon svgIcon="app-i" [inline]="true"></mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="checkout-field__wrap">
+            <div class="section-input">
+              <div class="section-input__field">
+                <mat-form-field appearance="standard" color="primary">
+                  <mat-label>Подъезд</mat-label>
+                  <input class="section-input__item" matInput formControlName="entrance">
+                  <button mat-icon-button matSuffix>
+                    <mat-icon svgIcon="app-i" [inline]="true"></mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="section-input">
+              <div class="section-input__field">
+                <mat-form-field appearance="standard" color="primary">
+                  <mat-label>Ваш номер квартиры</mat-label>
+                  <input class="section-input__item" matInput formControlName="apartment">
+                  <button mat-icon-button matSuffix>
+                    <mat-icon svgIcon="app-i" [inline]="true"></mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="checkout-field__wrap">
+            <div class="section-input">
+              <div class="section-input__field">
+                <mat-form-field appearance="standard" color="primary">
+                  <mat-label>Домофон</mat-label>
+                  <input class="section-input__item" matInput formControlName="doorphone">
+                  <button mat-icon-button matSuffix>
+                    <mat-icon svgIcon="app-i" [inline]="true"></mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="section-input">
+              <div class="section-input__field">
+                <mat-form-field appearance="standard" color="primary">
+                  <mat-label>Этаж</mat-label>
+                  <input class="section-input__item" matInput formControlName="floor">
+                  <button mat-icon-button matSuffix>
+                    <mat-icon svgIcon="app-i" [inline]="true"></mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="checkout-address" *ngIf="orderForm.value.selfService">
+          <div class="checkout__wrap checkout__wrap--column checkout__delivery">
+            <div class="page-name">Адрес ресторана</div>
+            <div class="checkout-address__content">
+              <div class="checkout-address__item" *ngFor="let point of pickupPoints$ |async; trackBy: trackByFn">
+                <div class="section-radio">
+                  <mat-radio-group color="primary" formControlName="pickupAddressId"
+                    (change)="updateCartForm(orderForm)">
+                    <mat-radio-button [value]="point.id">{{point.title}}</mat-radio-button>
+                    <span>{{point.address}}</span>
+                  </mat-radio-group>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="checkout__wrap checkout__wrap--mb19">
+          <div class="checkout__input" *ngIf="paymentMethods$ |async as methods">
+            <div class="page-name">Оплата</div>
+            <div class="section-input section-input--select" formGroupName="paymentMethod">
+              <span>Способ оплаты</span>
+              <div class="section-input__field">
+                <mat-form-field appearance="standard" color="primary">
+                  <mat-select disableRipple formControlName="id"
+                    (selectionChange)="changePaymentType($event.value,methods,orderForm)">
+                    <mat-option *ngFor="let method of methods; trackBy:trackByFn" [value]="method.id">
+                      {{method.title}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="checkout__input checkout__input--date" formGroupName="deliveryTimeInfo">
+            <div class="page-name">Дата</div>
+            <div class="section-input section-input--select">
+              <span>Желаемое время</span>
+              <div class="section-input__field">
+                <mat-form-field appearance="standard" color="primary">
+                  <mat-select disableRipple formControlName="deliveryType" (change)="updateCartForm(orderForm)">
+                    <mat-option value="fast"> Ближайшее</mat-option>
+                    <mat-option value="date-time"> Ко времени</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="section-input section-input--date"
+              *ngIf="orderForm.value.deliveryTimeInfo.deliveryType == 'date-time'">
+              <mat-form-field appearance="standard" color="primary">
+                <mat-label>Дата</mat-label>
+                <input matInput [min]="dateMin" [max]="dateMax$ |async" formControlName="deliveryDate" type="date">
+              </mat-form-field>
+              <mat-form-field appearance="standard" color="primary">
+                <mat-label>Время</mat-label>
+                <input matInput formControlName="deliveryTime" type="time">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="section-input__wrap section-input__comment">
+          <div class="section-input is-fullwidth">
+            <div class="section-input__field">
+              <mat-form-field class="is-fullwidth" appearance="standard" color="primary">
+                <mat-label>Комментарий к заказу</mat-label>
+                <textarea class="section-input__item" matInput cdkTextareaAutosize formControlName="comment"
+                  placeholder="Например: вход со двора"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="checkout__desc">Отправляя данные, вы соглашаетесь <a class="policy-link"
+            href="/usloviya-obrabotki-personalnyh-dannyh">с
+            политикой конфиденциальности</a></div>
+        <div class="section-total">
+          <div class="section-total__wrap">
+            <div class="section-total__title">Заказ</div>
+            <div class="section-total__sum">{{orderForm.value.orderTotal | wrstCurrency}}</div>
+          </div>
+          <div class="section-total__wrap">
+            <div class="section-total__title">Доставка</div>
+            <div class="section-total__sum">{{orderForm.value.deliveryCost | wrstCurrency}}</div>
+          </div>
+          <div class="section-total__wrap">
+            <div class="section-total__title">Скидка</div>
+            <div class="section-total__sum">{{orderForm.value.discountTotal | wrstCurrency}}</div>
+          </div>
+          <div class="section-total__wrap">
+            <div class="section-total__title section-total__title--fw500">Итог</div>
+            <div class="section-total__sum">{{orderForm.value.total | wrstCurrency}}</div>
+          </div>
+        </div>
+        <div class="section-order__submit">
+          <div class="section-order__error" *ngIf="orderForm.invalid && orderForm.errors">
+            <mat-error *ngFor="let error of orderForm.errors | keyvalue; trackBy:trackByFn">
+              <b>{{error.key}}</b> {{error.value}}
+            </mat-error>
+          </div>
+          <button mat-button [disabled]="orderForm.invalid" class="btn-primary"
+            (click)="order(orderForm.value)">Оформить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

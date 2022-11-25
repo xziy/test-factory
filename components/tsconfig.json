@@ -1,0 +1,40 @@
+{
+  "extends": "../project/tsconfig.json",
+  "include": [
+    "../project/src/**/*.d.ts",
+    "../project/src/**/*.ts",
+    "./**/*.d.ts",
+    "./**/*.ts",
+  ],
+  "compilerOptions": {
+    "typeRoots": [
+      "../project/node_modules/@types"
+    ],
+    "paths": {
+      "@angular/*": [
+        "../project/node_modules/@angular/*"
+      ],
+      "@appSource/*": [
+        "../project/src/app/*"
+      ],
+      "ngx-owl-carousel-o": [
+        "../project/node_modules/ngx-owl-carousel-o"
+      ],
+      "@axrl/ngx-extended-form-builder":[
+        "../project/node_modules/@axrl/ngx-extended-form-builder"
+      ],
+      "@webresto/worktime": [
+        "../project/node_modules/@webresto/worktime"
+      ],
+      "@webresto/ng-gql": [
+        "../project/node_modules/@webresto/ng-gql"
+      ],
+      "tslib": [
+        "../project/node_modules/tslib"
+      ],
+      "rxjs":[
+        "../project/node_modules/rxjs"
+      ]
+    }
+  }
+}

@@ -1,0 +1,7 @@
+<div class="page-text page-text--bold" [class]="textAlignClass" (click)="openDishModal()">{{dish?.name}}</div>
+<div class="product__foto" (click)="openDishModal()">
+  <img *ngIf="dishImageSrc() as imageSrc" [src]="imageSrc" (error)="errImg()" loading="lazy" width="100%" height="auto" alt="">
+</div>
+<div class="page-text page-text--gray page-text--mb" [class]="textAlignClass" (click)="openDishModal()">{{dish?.description}}
+</div>
+<app-dish-control class="dishcard__dish-control" (openDishModal)="openDishModal()" [dish]="dish" [isLoading]="isLoading$"></app-dish-control>

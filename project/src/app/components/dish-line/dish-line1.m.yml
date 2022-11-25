@@ -1,0 +1,102 @@
+unit:
+  version: 1
+  type: dish-line
+  author: webresto
+  name: dish-line
+  slug: dish-line1
+  description: Блок с информацией о блюде, также содержащий контрол управления блюдом
+  group: dish-line
+  shareable: true
+  componentPrefix: dish-line.component
+  layout:
+    - base
+    - mobile
+component:
+  constant:
+    states:
+      - key: buttonContent
+        default: icon
+        description: >-
+          Тип содержимого внутри кнопки выбора блюда - иконка, надпись
+          "корзина", либо стоимость блюда
+        name: Кнопка "выбрать блюдо"
+        enum:
+          - slug: icon
+            name: Отображать иконку корзины
+          - slug: cost
+            name: Показывать стоимость блюда
+          - slug: text
+            name: Отображать текст "Корзина"
+        type: enum
+      - name: showWeight
+        key: showWeight
+        default: true
+        description: Показывать или нет вес блюда (если есть)
+        type: boolean
+      - name: Текст внутри кнопки выбора блюда
+        key: buttonText
+        default: Корзина
+        description: >-
+          Текст, отображаемый внутри кнопки для добавления блюда в корзину.
+          Применяется ТОЛЬКО если state buttonContent установлен в значение
+          "text".
+        type: string
+      - name: Позиция кнопки с ценой/иконкой
+        key: buttonPosition
+        default: center
+        description: >-
+          Если выбрана кнопка с расположенной внутри иконкой либо ценой блюда,
+          позволяет расположить кнопку справа/слева либо по центру блока
+        type: enum
+        enum:
+          - slug: right
+            name: Расположить с правой стороны
+          - slug: left
+            name: Расположить с левой стороны
+          - slug: center
+            name: Расположить по центру блока.
+    cssVariables:
+      - key: primary-color
+        value: $primary-color
+        description: " "
+        name: primary-color
+      - key: primary-text-color
+        value: $minor-color
+        description: " "
+        name: primary-text-color
+      - key: minor-color
+        value: $minor-color
+        description: " "
+        name: minor-color
+      - key: icon-color
+        value: $minor-color
+        description: " "
+        name: icon-color
+      - key: secondary-color
+        value: $secondary-color
+        description: " "
+        name: secondary-color
+      - key: secondary-text-color
+        value: $secondary-text-color
+        description: " "
+        name: secondary-text-color
+      - key: global-border-radius-factor
+        value: 4px
+        description: " "
+        name: global-border-radius-factor
+  styles:
+    - name: basic
+      slug: basic
+      description: " "
+    - name: buttons-border-50
+      slug: buttons-border-50
+      description: " "
+    - name: buttons-border
+      slug: buttons-border
+      description: " "
+    - name: control-border
+      slug: control-border
+      description: " "
+    - name: simple
+      slug: simple
+      description: " "

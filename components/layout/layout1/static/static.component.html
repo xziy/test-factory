@@ -1,0 +1,7 @@
+<div class="static-page">
+  <div class="container" *ngIf="pageContent$ |async as pageContent">
+    <div class="static_inner">
+      <div [innerHTML]="pageContent" class="is-fullwidth"></div>
+    </div>
+  </div>
+</div>

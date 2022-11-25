@@ -1,0 +1,39 @@
+<main>
+  <div class="product" [class]="(showCartPanel$ |async) ? ' with_panel' : ''">
+    <div class="container">
+      <div class="product__inner" [id]="group.slug" *ngFor="let group of (dishes$ |async);trackBy:trackByFn">
+        <div class="page-title"> {{group.name }} </div>
+        <div class="page-desc" *ngIf="group.description">{{group.description}}</div>
+        <mat-chip-list [multiple]="true" *ngIf="group && getGroupTags(group).length > 0">
+          <mat-chip disableRipple [value]="tag" [selected]="filterControl.value[group.slug!].includes(tag)"
+            (click)="selectGroup(tag,group.slug!)" *ngFor="let tag of getGroupTags(group);trackBy:trackByFn">
+            {{tag}}
+          </mat-chip>
+        </mat-chip-list>
+        <div class="product__content">
+          <div [class]="'product__content-inner '+config.dishcardAlign">
+            <div class="product_dish_card" *ngFor="let item of getFilteredDishes(group);trackBy:trackByFn">
+              <app-dishcard [dish]="item"> </app-dishcard>
+            </div>
+          </div>
+        </div>
+        <ng-container *ngFor="let childGroup of group.childGroups;trackBy:trackByFn">
+          <div class="page-subtitle"> {{childGroup.name}} </div>
+          <div class="page-desc" *ngIf="childGroup.description">{{childGroup.description}}</div>
+          <div class="product__content">
+            <div [class]="'product__content-inner '+config.dishcardAlign">
+              <div class="product_dish_card" *ngFor="let item of getFilteredDishes(childGroup);trackBy:trackByFn">
+                <app-dishcard [dish]="item"> </app-dishcard>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <app-cart-panel class="mat-elevation-z4 cart-panel" *ngIf="showCartPanel$ |async"></app-cart-panel>
+</main>
+<ng-container *ngIf="dishes$ |async">
+  <app-review *ngIf="!config.hiddenReview"></app-review>
+  <app-contacts *ngIf="!config.hiddenContacts"></app-contacts>
+</ng-container>

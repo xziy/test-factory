@@ -1,0 +1,33 @@
+stages:
+  - test
+  - build
+  - deploy
+
+build:
+  stage: build
+  only: [staging] 
+  script:
+    - docker login git.hm:5050 -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+    - env | grep "CI_" > ./.CI_ENV && env | grep "GITLAB_" >> ./.CI_ENV
+    - docker build --network=host -t git.hm:5050/webresto/factory/layout_docker_images:base --build-arg NPM_PROXY="http://npm-proxy:8080" . 
+    - docker push git.hm:5050/webresto/factory/layout_docker_images:base
+
+deploy:
+  stage: deploy
+  only: [staging]
+  script:
+    - kubectl config use-context kubernetes-admin@kubernetes
+    - sed -i "s/<TG_CHAT_ID>/${TG_CHAT_ID}/g" ./.ci/staging.yml
+    - sed -i "s/<TG_APIKEY>/${TG_APIKEY}/g" ./.ci/staging.yml
+    - sed -i "s/<DEPLOY_TOKEN_42PUB>/${DEPLOY_TOKEN_42PUB}/g" ./.ci/staging.yml      
+    - sed -i "s/<REVISION>/${CI_PIPELINE_IID}-${GITLAB_USER_LOGIN}-${CI_COMMIT_SHORT_SHA}/g" ./.ci/staging.yml
+    - kubectl apply -f ./.ci/staging.yml
+
+# build_test:
+#   stage: build_test
+#   except:
+#     - master
+#     - staging
+#   script:
+#     - env | grep "TG_" > ./.CI_ENV && cat ./.CI_ENV && env | grep "CI_" >> ./.CI_ENV && env | grep "DEPLOY_" >> ./.CI_ENV &&  env | grep "GITLAB_" >> ./.CI_ENV 
+#     - docker run  -v $PWD:/tmp/sources/ -v $PWD/.CI_ENV:/app/.CI_ENV -v $PWD/.ci/build_tests:/app/bootstrap git.hm:5050/webresto/factory/layout_docker_images:base

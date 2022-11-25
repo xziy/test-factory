@@ -1,0 +1,107 @@
+unit:
+  version: 1
+  type: header
+  author: webresto
+  name: header
+  slug: header1
+  description: Шапка только с логотипом, маленьким, большим и с бордером, смещенные на 7px
+  group: header
+  shareable: false
+  postActions: true
+  componentPrefix: header.component
+  layout:
+    - base
+component:
+  constant:
+    states:
+      - type: enum
+        enum:
+          - slug: logo-square
+            name: Квадратный логотип
+          - slug: logo-rectangle
+            name: Прямоугольный логотип
+          - slug: logo-square+logo-rectangle
+            name: Квадратный логотип и картинка для текстовогго логотипа
+          - slug: logo-square+text
+            name: Квадратный логотип и текст
+          - slug: text
+            name: Просто текст без логотипа
+        default: logo-square+logo-rectangle
+        description: Тип картинки у логотипа
+        key: logo
+        name: logo
+      - type: enum
+        enum:
+          - slug: left
+            name: Слева
+          - slug: right
+            name: Справа
+        default: left
+        description: Позиция у панели с меню навигации (слева-справа)
+        key: positionNavigationMenu
+        name: positionNavigationMenu
+      - type: boolean
+        default: false
+        description: Отображать ли кнопку логина в ЛК
+        key: visibleLoginButton
+        name: visibleLoginButton
+      - type: boolean
+        default: false
+        description: Отображать ли в хедере кнопку с корзиной
+        key: visibleCartButton
+        name: visibleCartButton
+      - type: boolean
+        default: true
+        description: Отображать ли панель с меню навигации
+        key: visibleNavigationMenu
+        name: Показывать панель с меню навигации
+    cssVariables:
+      - key: primary-color
+        value: $primary-color
+        description: " "
+        name: primary-color
+      - key: secondary-color
+        value: $secondary-color
+        description: " "
+        name: secondary-color
+      - key: primary-text-color
+        value: $primary-text-color
+        description: " "
+        name: primary-text-color
+      - key: secondary-text-color
+        value: $secondary-text-color
+        description: " "
+        name: secondary-text-color
+      - key: icon-color
+        value: $secondary-color
+        description: " "
+        name: icon-color
+      - key: global-border-radius-factor
+        value: $global-border-radius-factor
+        description: " "
+        name: global-border-radius-factor
+      - key: background-header
+        value: $primary-color
+        description: " "
+        name: background-header
+    variables:
+      - key: phoneNumber
+        default: ""
+        description: Номер телефона
+        name: phoneNumber
+      - key: statusMessage
+        default: ""
+        description: Текст в заголовке
+        name: statusMessage
+      - key: logoSquareLink
+        default: assets/img/header/logo.svg
+        description: Ссылка на картинку с квадратным лого в проекте
+        name: logoSquareLink
+      - key: logoRectangleLink
+        default: assets/img/page-1/product/foto-1.png
+        description: Ссылка на картинку с прямоугольным лого в проекте
+        name: logoRectangleLink
+      - key: textForTextHeaderLogo
+        default: Название доставки
+        description: Текст рядом с логотипом либо вместо него, например название доставки
+        name: Текстовый логотип

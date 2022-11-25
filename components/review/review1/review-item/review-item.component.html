@@ -1,0 +1,17 @@
+<ng-content select="prev"></ng-content>
+<div [class]="singleReview ? 'reviews__item quoted': 'reviews__item'">
+  <div class="reviews__wrap mr-4">
+    <div class="page-name">{{item.name}}</div>
+    <div class="reviews__rating">
+      <div class="page-text">{{item.rate}}/5</div>
+      <div class="reviews__stars">
+        <mat-icon *ngFor="let star of [0,1,2,3,4];trackByFn"
+          [class]="star < item.rate ? 'rating__personal' : 'rating__global'" svgIcon="app-star"></mat-icon>
+      </div>
+    </div>
+  </div>
+  <div class="reviews__content-text">
+    <div class="page-text"> {{item.opinion}} </div>
+  </div>
+</div>
+<ng-content select="next"></ng-content>

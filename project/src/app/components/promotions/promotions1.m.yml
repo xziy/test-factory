@@ -1,0 +1,73 @@
+unit:
+  version: 1
+  type: promotions
+  author: webresto
+  name: promotions
+  slug: promotions1
+  description: кароточка блюда где заголовок сверху
+  group: promotions
+  shareable: false
+  componentPrefix: promotions.component
+  layout:
+    - base
+    - mobile
+component:
+  constant:
+    states:
+      - default: true
+        description: Повторять ли слайды в цикле
+        key: loop
+        name: loop
+        type: boolean
+      - default: false
+        description: Отображать ли точки-переключатели слайдов
+        key: dots
+        name: dots
+        type: boolean
+      - key: animation
+        default: diffusion
+        description: Анимация слайдов
+        name: Анимация
+        type: enum
+        enum:
+          - slug: diffusion
+            name: Рассеивание
+          - slug: shifting
+            name: Сдвиг
+      - key: autoplay
+        default: true
+        description: Листать ли слайды автоматически
+        name: autoplay
+        type: boolean
+      - key: rtl
+        default: true
+        description: Направление перелистывания слайдов
+        name: Листать справа налево
+        type: boolean
+      - name: Кнопки "Вперед - назад"
+        key: showNavigationButton
+        default: true
+        description: Показывать ли кнопки переключения слайдов
+        type: boolean
+      - name: horizontalPadding
+        key: horizontalPadding
+        default: 0
+        description: Отступ от левого и правого края
+        type: number
+    cssVariables:
+      - key: primary-color
+        value: $secondary-text-color
+        description: " "
+        name: primary-color
+      - key: secondary-color
+        value: $primary-color
+        description: " "
+        name: secondary-color
+      - key: icon-color
+        value: $secondary-color
+        description: " "
+        name: icon-color
+      - key: global-border-radius-factor
+        value: $global-border-radius-factor
+        description: Радиус для закругления углов
+        name: global-border-radius-factor

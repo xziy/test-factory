@@ -1,0 +1,139 @@
+@import "./colors";
+
+:host {
+  display: block;
+}
+
+.footer {
+  background-color: $background-footer;
+  padding-top: 54px;
+  padding-bottom: 1.0625rem;
+  @media (max-width: 991px) {
+    padding-top: 10px;
+    padding-bottom: 42px;
+  }
+  @media (max-width: 575px) {
+    padding-top: 1rem;
+    padding-bottom: 12px;
+  }
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    max-width: 1300px;
+    padding: 0 15px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    @media (max-width: 991px) {
+      padding-bottom: 30px;
+    }
+    @media (max-width: 575px) {
+      padding-bottom: 30px;
+      border-bottom: none;
+    }
+  }
+  &__logo {
+    img {
+      &:not(.small-logo) {
+        width: 100%;
+        max-width: 295px;
+      }
+      &.small-logo {
+        width: 3.125rem;
+      }
+      height: 3.125rem;
+      object-fit: contain;
+    }
+  }
+  &__social {
+    display: flex;
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 1.25rem;
+      height: 1.25rem;
+      margin-right: 28px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+    mat-icon {
+      width: 1.25rem;
+      height: auto;
+      fill: $icon-color;
+      transition: 0.2s;
+      &:hover {
+        fill: $secondary-text-color;
+      }
+    }
+  }
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+    @media (max-width: 991px) {
+      margin-top: 30px;
+    }
+    @media (max-width: 575px) {
+      justify-content: flex-start;
+      flex-direction: column-reverse;
+      margin-top: 0;
+    }
+  }
+  &__nav {
+    display: flex;
+    a {
+      padding: 0;
+    }
+    &:first-child {
+      flex-wrap: wrap;
+    }
+    &:last-child {
+      .page-text {
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+      @media (max-width: 575px) {
+        .page-text {
+          font-size: 1rem;
+          line-height: 1.5rem;
+        }
+      }
+    }
+    @media (max-width: 575px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    a {
+      margin-right: 32px;
+      margin-bottom: 1rem;
+      @media (max-width: 575px) {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+/* text styles */
+
+.page-text {
+  color: $primary-text-color;
+  white-space: nowrap;
+  transition: 0.2s;
+  &:hover {
+    color: $secondary-text-color;
+  }
+  @media (max-width: 575px) {
+    font-size: 1rem;
+    line-height: 1rem;
+    margin-bottom: 1rem;
+  }
+}

@@ -1,0 +1,30 @@
+<footer class="footer" *ngIf="canShow$ |async">
+  <div class="footer__inner">
+    <div class="footer__top">
+      <div class="footer__logo">
+        <img [src]="config.logoLink" [class]="config.smallLogo ? 'small-logo':''" loading="lazy" alt="logo">
+      </div>
+      <div class="footer__social">
+        <a mat-icon-button *ngFor="let network of socialNetworksLinkKeys$ |async;trackBy:trackByFn"
+          [href]="network.link" target="_blank">
+          <mat-icon *ngIf="network.icon" [svgIcon]="network.icon"></mat-icon>
+        </a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="footer__nav">
+        <ng-container *ngFor="let point of navigationPoints$ |async; trackBy:trackByFn">
+          <a mat-button *ngIf="!isHttpLink(point.link);else outerLink" class="page-text" [routerLink]="point.link"
+            [disabled]="!point.active">{{point.label}}</a>
+          <ng-template #outerLink>
+            <a mat-button class="page-text" [href]="point.link" target="_blank"
+              [disabled]="!point.active">{{point.label}}</a>
+          </ng-template>
+        </ng-container>
+      </div>
+      <div class="footer__nav">
+        <a class="page-text" href="https://webresto.org/" target="_blank">webresto.org</a>
+      </div>
+    </div>
+  </div>
+</footer>

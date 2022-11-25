@@ -1,0 +1,38 @@
+<div [class]="classForControl" *ngIf="order$ |async as cart">
+  <ng-container *ngIf="dish && dish.balance !== 0;else nullBalance">
+    <div class="page-name" *ngIf="config?.buttonContent !== 'cost' && !panelMode">
+      <ng-container *ngIf="!dish.modifiers || dish.modifiers?.length === 0; else diffPriceTemplate">{{dishTotalPrice
+        |wrstCurrency}}</ng-container>
+    </div>
+    <ng-container *ngIf="dishInorder$ |async as dishInCart">
+      <div *ngIf="(modifierForm && modifierForm.value)  || dishInCart.length > 0; else notInCart"
+        class="dish-control__nav">
+        <button mat-icon-button [disabled]="isLoading |async" (click)="removeFromCart()" class="dish-control__minus">
+          <mat-icon svgIcon="app-minus"></mat-icon>
+        </button>
+        <div class="dish-control__qty">{{getDishInCartAmount(dishInCart) }}</div>
+        <button mat-icon-button [disabled]="isLoading |async" class="dish-control__plus" (click)="addToCart()">
+          <mat-icon svgIcon="app-plus"></mat-icon>
+        </button>
+      </div>
+      <ng-template #notInCart>
+        <button (click)="addToCart()" [disabled]="isLoading |async" mat-button class="btn-primary"
+          [ngSwitch]="config.buttonContent">
+          <span class="product__text" *ngSwitchCase="'text'">{{config.buttonText}}</span>
+          <span class="product__cost" *ngSwitchCase="'cost'">
+            <ng-container *ngIf="!dish.modifiers || dish?.modifiers?.length === 0; else diffPriceTemplate">
+              {{dishTotalPrice
+              |wrstCurrency}}</ng-container>
+          </span>
+          <mat-icon class="product__icon" *ngSwitchCase="'icon'" svgIcon="app-cart"> </mat-icon>
+        </button>
+      </ng-template>
+    </ng-container>
+  </ng-container>
+  <ng-template #nullBalance>
+    <div class="page-text">Нет в наличии</div>
+  </ng-template>
+  <ng-template #diffPriceTemplate>
+    от {{diffPrice |wrstCurrency}}
+  </ng-template>
+</div>

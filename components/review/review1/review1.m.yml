@@ -1,0 +1,84 @@
+unit:
+  version: 1
+  type: review
+  author: webresto
+  name: review
+  slug: review1
+  description: " "
+  group: review
+  componentPrefix: review.component
+  shareable: true
+  layout:
+    - base
+    - mobile
+component:
+  constant:
+    states:
+      - type: boolean
+        default: true
+        description: Повторять ли слайды в цикле
+        key: loop
+        name: loop
+      - type: boolean
+        default: true
+        description: Листать ли слайды автоматически
+        key: autoplay
+        name: autoplay
+      - name: Показывать по одному
+        key: singleReview
+        default: true
+        description: Отображать отзывы по одному или выводить несколько отзывов на странице
+        type: boolean
+      - name: Переключатели
+        key: dots
+        default: true
+        description: >-
+          Отображать точки-переключатели под блоком отзывов (только в случае,
+          если отображается 1 отзыв на странице).
+        type: boolean
+      - name: Стрелки
+        key: nav
+        default: true
+        description: Отображать стрелки навигации по отзывам.
+        type: boolean
+    cssVariables:
+      - key: primary-color
+        value: $secondary-color
+        description: " "
+        name: primary-color
+      - key: secondary-color
+        value: $secondary-color
+        description: " "
+        name: secondary-color
+      - key: minor-color
+        value: $secondary-text-color
+        description: " "
+        name: minor-color
+      - key: primary-text-color
+        value: $minor-color
+        description: " "
+        name: primary-text-color
+      - key: secondary-text-color
+        value: $secondary-color
+        description: " "
+        name: secondary-text-color
+      - key: white
+        value: "#fff"
+        description: " "
+        name: white
+      - key: global-border-radius-factor
+        value: $global-border-radius-factor
+        description: " "
+        name: global-border-radius-factor
+      - key: amount-rate-stars-color
+        value: "#EB8D00"
+        description: " "
+        name: amount-rate-stars-color
+      - key: background-reviews-color
+        value: $background-reviews-color
+        description: " "
+        name: background-reviews-color
+      - key: icon-color
+        value: $primary-color
+        description: " "
+        name: icon-color

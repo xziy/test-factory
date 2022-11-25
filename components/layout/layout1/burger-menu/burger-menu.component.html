@@ -1,0 +1,31 @@
+<div class="header-menu">
+  <div class="header-menu__header">
+    <a class="header-menu__logo" (click)="close()" [routerLink]="(startMenuSlug$ |async)?.[0]"
+      [fragment]="(startMenuSlug$ |async)?.[1]">
+      <img *ngIf="['logo-square','logo-square+logo-rectangle','logo-square+text'].includes(headerConfig.logo)"
+        class="logo-square" [src]="headerConfig.logoSquareLink" alt="">
+      <img *ngIf="['logo-rectangle','logo-square+logo-rectangle'].includes(headerConfig.logo)" class="logo-rectangle"
+        [src]="headerConfig.logoRectangleLink" alt="">
+      <h1 *ngIf="['logo-square+text','text'].includes(headerConfig.logo)" class="logo-title">{{
+        headerConfig?.textForTextHeaderLogo
+        || ''}}</h1>
+    </a>
+    <button mat-icon-button disableRipple class="header-menu__close" (click)="close()">
+      <mat-icon svgIcon="app-close"></mat-icon>
+    </button>
+  </div>
+  <nav class="header-menu__nav">
+    <ng-container *ngFor="let point of navigationPoints$ |async; trackBy:trackByFn">
+      <a mat-button (click)="close()" *ngIf="!isHttpLink(point.link);else outerLink" class="header-menu__link" [routerLink]="point.link"
+        [disabled]="!point.active">{{point.label}}</a>
+      <ng-template #outerLink>
+        <a mat-button (click)="close()" class="header-menu__link" [href]="point.link" target="_blank"
+          [disabled]="!point.active">{{point.label}}</a>
+      </ng-template>
+    </ng-container>
+  </nav>
+  <div class="header-menu__info">
+    <a class="header-menu__title" [href]="'tel:'+headerConfig.phoneNumber">{{headerConfig.phoneNumber}}</a>
+    <div class="header-menu__subtitle">{{headerConfig.statusMessage}}</div>
+  </div>
+</div>

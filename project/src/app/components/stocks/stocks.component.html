@@ -1,0 +1,14 @@
+<div class="stocks">
+  <div class="container" *ngIf="stocks$ |async as stocksData">
+    <div class="stocks__inner">
+      <div *ngFor="let stock of stocksData.stocks;trackBy:trackByFn"
+        [class]="config.column_count === 'one' ? 'stocks__foto-big':'stocks__foto-small'">
+        <a [routerLink]="stock.mnemonicId">
+          <img *ngIf="stock.cover && stock.cover[0] && stock.cover[0][stocksData.srcIndicator]"
+            [src]="stock.cover?.[0]?.[stocksData.srcIndicator]" [alt]="stock.teaser" [title]="stock.title"
+            loading='lazy' width="100%">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

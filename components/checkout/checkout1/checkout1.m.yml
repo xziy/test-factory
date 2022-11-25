@@ -1,0 +1,39 @@
+unit:
+  version: 1
+  type: checkout
+  author: webresto
+  name: checkout
+  slug: checkout1
+  description: Страница оформления заказа выбором адреса через кнопки
+  group: checkout
+  shareable: false
+  componentPrefix: checkout.component
+  layout:
+    - base
+component:
+  constant:
+    cssVariables:
+      - key: primary-color
+        value: $primary-color
+        description: " "
+        name: primary-color
+      - key: secondary-color
+        value: $secondary-color
+        description: " "
+        name: secondary-color
+      - key: minor-color
+        value: $minor-color
+        description: " "
+        name: minor-color
+      - key: primary-text-color
+        value: $secondary-text-color
+        description: " "
+        name: primary-text-color
+      - key: secondary-text-color
+        value: $minor-color
+        description: " "
+        name: secondary-text-color
+      - key: icon-color
+        value: $minor-color
+        description: " "
+        name: icon-color

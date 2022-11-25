@@ -1,0 +1,28 @@
+<owl-carousel-o *ngIf="slidesData$ |async as slidesData" [options]="slidesData.customOptions" #carousel
+  (dragging)="dragEvent($event.dragging)">
+  <ng-container *ngFor="let slide of slidesData.slides;let i=index;trackBy:trackByFn">
+    <ng-template carouselSlide [id]="i.toString()" [width]="(viewport$ |async)?.innerWidth!">
+      <div [style.padding]="slidePadding" id="promotions-slide">
+        <button mat-icon-button class="arrow arrow-prev" *ngIf="showArrow$ |async" (click)="carousel.prev()">
+          <mat-icon svgIcon="app-arrow-prev"></mat-icon>
+        </button>
+        <img class="foto" *ngIf="!slide.link; else slideAslink" [src]="slide.currentUrl" height="100%"
+          [width]="getImgWidth(viewport$ |async)" alt="" />
+        <ng-template #slideAslink>
+          <img class="foto is-cursor-pointer" *ngIf="!isHttpLink(slide.link);else slideHttpLink"
+            [owlRouterLink]="slide.link" [stopLink]="(isDragging$ |async)!" [src]="slide.currentUrl" height="100%"
+            [width]="getImgWidth(viewport$ |async)" alt="" />
+          <ng-template #slideHttpLink>
+            <a [href]="slide.link" target="_blank">
+              <img class="foto is-cursor-pointer" [src]="slide.currentUrl" height="100%"
+                [width]="getImgWidth(viewport$ |async)" alt="" />
+            </a>
+          </ng-template>
+        </ng-template>
+        <button mat-icon-button class="arrow arrow-next" *ngIf="showArrow$ |async" (click)="carousel.next()">
+          <mat-icon svgIcon="app-arrow-next"></mat-icon>
+        </button>
+      </div>
+    </ng-template>
+  </ng-container>
+</owl-carousel-o>

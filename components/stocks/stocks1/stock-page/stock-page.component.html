@@ -1,0 +1,11 @@
+<div class="stock-page">
+  <div class="container" *ngIf="stock$ |async as stockData">
+    <div class="stock_inner">
+      <h1>{{stockData.stock.title}} </h1>
+      <h2>{{stockData.stock.teaser}} </h2>
+      <img *ngIf="stockData.stock.cover && stockData.stock.cover[0] && stockData.stock.cover[0][stockData.srcIndicator]" [src]="stockData.stock.cover[0][stockData.srcIndicator]" [alt]="stockData.stock.teaser"
+        [title]="stockData.stock.title" loading='lazy' width="100%">
+      <div [innerHTML]="stockData.stock.page" class="is-fullwidth"></div>
+    </div>
+  </div>
+</div>

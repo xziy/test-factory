@@ -1,0 +1,124 @@
+@import "./colors";
+
+:host {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+
+  .reviews__item {
+    display: flex;
+    flex-direction: column;
+    background: $primary-color;
+    border-radius: calc(#{$global-border-radius-factor} * 2.5);
+    width: 100%;
+    max-width: 50rem;
+    padding: 2rem 1rem 1rem 2.5rem;
+    height: 16rem;
+    box-shadow: 0px 4px 1.25rem rgba(0, 0, 0, 0.07);
+    box-sizing: border-box;
+    margin: 2rem 0 1.375rem 0;
+    position: relative;
+
+    &.quoted {
+      flex-direction: row;
+      &::after {
+        content: "";
+        position: absolute;
+        top: -32px;
+        left: -39px;
+        overflow: visible;
+        background-image: url("../assets/img/icon-1.svg");
+        width: 58px;
+        height: 45px;
+        @media (max-width: 578px) {
+          content: none;
+        }
+      }
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: -32px;
+        right: -41px;
+        overflow: visible;
+        background-image: url("../assets/img/icon-2.svg");
+        width: 58px;
+        height: 45px;
+        @media (max-width: 578px) {
+          content: none;
+        }
+      }
+    }
+
+    @media (max-width: 578px) {
+      flex-direction: column;
+      padding: 1rem;
+      margin: 0.625rem 0;
+    }
+  }
+
+  .reviews__content-text {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5rem;
+
+    @media (max-width: 578px) {
+      padding-left: 0;
+      margin-top: 35px;
+    }
+  }
+  .reviews__stars {
+    display: flex;
+    margin-left: 10px;
+    mat-icon {
+      width: 19px;
+      height: 18px;
+      margin-right: 4px;
+    }
+  }
+  .reviews__rating {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+
+    .rating {
+      &__global {
+        fill: rgba($secondary-text-color, 0.2);
+      }
+      &__global-active {
+        fill: $rating-color;
+      }
+      &__personal {
+        fill: $secondary-color;
+      }
+    }
+
+    @media (max-width: 578px) {
+      display: flex;
+    }
+  }
+}
+
+/* text styles */
+
+.page-name {
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  color: $primary-text-color;
+}
+
+.page-text {
+  color: $primary-text-color;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-hyphens: manual;
+  hyphens: auto;
+}

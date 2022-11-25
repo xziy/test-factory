@@ -1,0 +1,23 @@
+unit:
+  version: 1
+  type: cart-panel
+  author: webresto
+  name: cart-panel
+  slug: cart-panel1
+  description: Компонент с панелькой корзины, зафиксирован слева от блюд на странице с меню
+  group: cart-panel
+  shareable: false
+  componentPrefix: cart-panel.component
+  layout:
+    - base
+component:
+  constant:
+    cssVariables:
+      - key: secondary-color
+        value: "#8252F4"
+        description: " "
+        name: secondary-color
+      - key: primary-text-color
+        value: $primary-color
+        description: " "
+        name: primary-text-color

@@ -1,0 +1,67 @@
+<div class="order" *ngIf="order$ |async as orderData">
+  <div class="order__inner">
+    <div class="page-title">Информация о заказе</div>
+    <div class="order__info">
+      <div class="order__item">
+        <div class="page-text page-text--gray">Ваш номер заказа</div>
+        <div class="page-text page-text--bold page-text--700">{{orderData.rmsOrderNumber ? orderData.rmsOrderNumber :
+          orderData.id }}
+        </div>
+      </div>
+
+      <div class="order__item" *ngIf="orderData.rmsDeliveryDate">
+        <div class="page-text page-text--gray">Дата</div>
+        <div class="page-text page-text--bold">{{orderData.rmsDeliveryDate}}</div>
+      </div>
+      <div class="order__item" *ngIf="!!orderData.customer && !!orderData.customer.phone">
+        <div class="page-text page-text--gray">Номер телефона</div>
+        <div class="page-text page-text--bold">+7{{orderData.customer.phone}}</div>
+      </div>
+      <div class="order__item" *ngIf="!!orderData.address && !!orderData.address.street">
+        <div class="page-text page-text--gray">Адрес доставки</div>
+        <div class="page-text page-text--bold">{{orderData.address.street}}
+          <span *ngIf="orderData.address.home">, {{orderData.address.home}}</span>
+          <span *ngIf="orderData.address.entrance">, {{orderData.address.entrance}}</span>
+          <span *ngIf="orderData.address.floor">, {{orderData.address.floor}}</span>
+          <span *ngIf="orderData.address.apartment">, {{orderData.address.apartment}}</span>
+        </div>
+      </div>
+      <div class="order__item" *ngIf="!!orderData.comment">
+        <div class="page-text page-text--gray">Комментарий</div>
+        <div class="page-text page-text--bold">{{orderData.comment}}</div>
+      </div>
+      <div class="order__item" *ngIf="!!orderData.paymentMethod">
+        <div class="page-text page-text--gray">Способ оплаты</div>
+        <div class="page-text page-text--bold">{{orderData.paymentMethod.title}}</div>
+      </div>
+    </div>
+    <div class="page-name">Заказ</div>
+    <div class="order__content">
+      <div *ngFor="let item of orderData.dishes ; trackBy:trackByFn"
+        [class]="item.modifiers && item.modifiers.length > 0 ? 'order__product' : 'order__product row-line'">
+        <div class="page-text page-text--black">{{item.dish.name}}</div>
+        <div class="order__addition" *ngIf="item.modifiers && item.modifiers.length > 0">
+          <div class="order__left">Дополнительные ингридиенты:</div>
+          <div class="order__right">
+            <div class="order__addition-item" *ngFor="let modifier of item.modifiers; trackBy:trackByFn">
+              <span>{{modifier.dish.name}}</span>
+              <span *ngIf="modifier.dish.weight">{{modifier.dish.weight | webrestoWeight}}</span>
+              <span>{{modifier.amount}} шт</span>
+              <span>{{modifier.dish.price | wrstCurrency}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="order__wrap">
+          <div class="page-text page-text--black">{{item.amount}} шт</div>
+          <div class="page-text page-text--black">{{item.itemTotal | wrstCurrency}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="order__total">
+      <div class="order__total-wrap" *ngFor="let article of totalParts; trackBy:trackByFn">
+        <div class="page-text page-text--gray">{{article.name}}</div>
+        <div class="page-text">{{ getPartValue(orderData, article.key) | wrstCurrency}}</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+@import "./colors";
+
+.header__burger {
+  display: none;
+  align-items: center;
+  @media (max-width: 991px) {
+    display: flex;
+    justify-content: flex-end;
+    height: 62px;
+  }
+  @media (max-width: 630px) {
+    span {
+      margin-top: 10px;
+    }
+  }
+}
+
+mat-sidenav-container.mat-sidenav-container {
+  overflow: hidden;
+
+  mat-sidenav-content.mat-sidenav-content {
+    overflow-x: hidden;
+  }
+
+  &,
+  mat-sidenav-content.mat-sidenav-content {
+    height: 100%;
+    width: 100%;
+    scroll-behavior: smooth;
+  }
+}

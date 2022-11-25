@@ -1,0 +1,13 @@
+:host {
+  display: block;
+}
+
+.static-page {
+  min-height: 63vh;
+  .static_inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

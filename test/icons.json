@@ -1,0 +1,119 @@
+{
+  "unit": "layout1",
+  "description": "Базовая сборка, все по макету\n(без изменения цвета в компонентах)",
+  "snippets": {
+    "head": [
+      "<title>Тестируем ...</title>"
+    ],
+    "bodyTop": [],
+    "bodyBottom": []
+  },
+  "constant": {
+    "cssVariables": {
+      "primary-color": "#fff",
+      "secondary-color": "#8252F4",
+      "minor-color": "#191D32",
+      "primary-text-color": "#191D32",
+      "secondary-text-color": "#707584",
+      "icon-color": "#8252F4",
+      "global-border-radius-factor": "4px",
+      "rating-color": "#EB8D00"
+    }
+  },
+  "inventory": {
+    "cart": {
+      "unit": "cart1",
+      "constant": {
+        "cssVariables": {}
+      }
+    },
+    "cart-panel": {
+      "unit": "cart-panel1",
+      "constant": {
+        "cssVariables": {}
+      }
+    },
+    "checkout": {
+      "unit": "checkout2",
+      "constant": {
+        "cssVariables": {}
+      }
+    },
+    "contacts": {
+      "unit": "contacts1",
+      "constant": {
+        "states": {},
+        "cssVariables": {}
+      }
+    },
+    "dish-modal": {
+      "unit": "dish-modal1",
+      "constant": {
+        "states": {},
+        "cssVariables": {}
+      }
+    },
+    "dish-nav-bar": {
+      "unit": "dish-nav-bar1",
+      "constant": {
+        "states": {},
+        "cssVariables": {}
+      }
+    },
+    "dishcard": {
+      "unit": "dishcard2",
+      "constant": {
+        "states": {},
+        "cssVariables": {}
+      },
+      "style": "basic"
+    },
+    "footer": {
+      "unit": "footer1",
+      "constant": {
+        "states": {},
+        "cssVariables": {}
+      }
+    },
+    "header": {
+      "unit": "header1",
+      "constant": {
+        "states": {
+          "logo": "text",
+          "positionNavigationMenu": "right",
+          "visibleCartButton": true
+        },
+        "variables": {
+          "logoSquareLink": "https://cdn.webresto.dev/s21v0a/external-content.duckduckgo.com.gif",
+          "logoRectangleLink": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvignette2.wikia.nocookie.net%2Flogopedia%2Fimages%2Fc%2Fc8%2FPizzahutmakeitgreat.png%2Frevision%2Flatest%2Fscale-to-width-down%2F185%3Fcb%3D20140507123109&f=1&nofb=1"
+        },
+        "cssVariables": {
+          "secondary-text-color": "#878787",
+          "secondary-color": "#1e00ff",
+          "primary-text-color": "#ffffff",
+          "primary-color": "#ff0000",
+          "icon-color": "#fff700"
+        }
+      }
+    },
+    "promotions": {
+      "unit": "promotions1",
+      "constant": {
+        "cssVariables": {},
+        "states": {
+          "animation": "diffusion"
+        }
+      }
+    }
+  },
+  "iconOverrides": [
+    {
+      "iconName": "cart",
+      "svg": "<svg width=\"206\" height=\"103\" viewBox=\"0 0 206 103\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n<circle cx=\"102.5\" cy=\"51.5\" r=\"38.5\" fill=\"#D80000\"/>\r\n<rect x=\"5\" y=\"5\" width=\"196\" height=\"93\" stroke=\"#04BA00\" stroke-width=\"10\"/>\r\n</svg>"
+    }
+  ],
+  "environment": {
+    "backendLink": "https://32001.fwr.m42.cx/graphql",
+    "imageLink": "https://32001.fwr.m42.cx"
+  }
+}

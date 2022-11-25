@@ -1,0 +1,69 @@
+#!/bin/bash
+env_load () {
+  input=$1
+  while IFS= read -r line
+  do
+    IFS='=' read -r -a array <<< "$line"
+    export ${array[0]}="${array[1]}"
+  done < "$input"
+}
+
+env_load  ./.CI_ENV
+
+echo "### TEST BUILD"
+set -x;
+RUNDIR=$PWD
+#top -b -n 1
+DATETIME=`TZ='Europe/Moscow' date '+%Y-%m-%d_%H:%M'`
+LOG_FILE=builder-$DATETIME;
+
+
+# send message to Chat
+message="Building tests ⚙️ in progress...%0ABranch: "$CI_COMMIT_BRANCH
+url="https://api.telegram.org/bot"$TG_APIKEY"/sendMessage"
+#TG_CHAT_ID=-1001216755974
+curl -s -d "chat_id=${TG_TESTING_CHAT_ID}&text=$message&parse_mode=html&disable_web_page_preview=1" $url
+ls /cache/
+rm -rf /app/layouts && mkdir -p /app/layouts/base_layouts
+cp -R /tmp/sources/* /app/layouts/base_layouts
+rm -rf /tmp/sources/*  && rm -r /tmp/sources/.[a-zA-Z_-]*
+
+for file in /app/layouts/base_layouts/test/*.json; do
+  filename=$(basename -- "$file")
+  receipe="${filename%.*}"
+  test_identy=${receipe}-${CI_COMMIT_SHORT_SHA}
+  mkdir -p /tmp/${test_identy}/
+  LOG=/tmp/full.log
+  
+  # get description from test
+  description=`jq .description -r $file`
+
+  echo "$DATETIME >> ${test_identy} LOG:" > $LOG
+  echo "<pre>" >> $LOG
+  
+  /app/project_builder build --recipe=$file --components-library=/app/layouts --output=/tmp/${test_identy} 2>&1 |tee -a $LOG
+  
+  test_message="<b>${test_identy}</b>:%0A${description}%0Ahttps://${test_identy}.42.pub%0A<a href='https://${test_identy}.42.pub/archive.tar.gz'>prj</a> | <a href='https://${test_identy}.42.pub/full.log'>log</a> |  <a href='https://${test_identy}.42.pub/${filename}'>recepie</a> |  <a href='https://${test_identy}.42.pub/!src'>src</a>%0A"
+  
+  cd /tmp/${test_identy} 
+  ln -s /cache/node_modules /tmp/${test_identy}/;
+
+  ng build -c production 2>&1 | tee -a $LOG;
+  echo "</pre>" >> $LOG
+  
+  mkdir -p /tmp/${test_identy}/dist/project/!src
+  cd /tmp/${test_identy}/dist/project/
+  cp $LOG .
+  cp /tmp/${test_identy}/archive.tar.gz .
+  tar -xvf /tmp/${test_identy}/archive.tar.gz -C /tmp/${test_identy}/dist/project/!src/
+  cp $file .
+  if [ ! -f ./index.html ]; then  
+    cp $LOG index.html
+    test_message=$test_message"status: <b>fail</b> 🐖💨 %0A"
+  else  
+    test_message=$test_message"status: ok ✅ %0A"
+  fi
+  tar -cvf /tmp/${test_identy}.tar .
+  curl -F token=$DEPLOY_TOKEN_42PUB  -F site=@"/tmp/${test_identy}.tar" https://42.pub/static_pages/upload.php --insecure
+  curl -s -d "chat_id=${TG_TESTING_CHAT_ID}&text=$test_message&parse_mode=html&disable_web_page_preview=1" $url
+done

@@ -1,0 +1,103 @@
+@import "../colors";
+
+mat-dialog-content.mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+h3 {
+  display: flex;
+  justify-content: space-between;
+  font-size: 2rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  color: $primary-text-color;
+  padding-top: 22px;
+  position: relative;
+  @media (max-width: 575px) {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    padding-top: 0;
+  }
+}
+mat-form-field {
+  width: 100%;
+}
+
+.add-review {
+  &__input {
+    margin-bottom: 1.25rem;
+    @media (max-width: 575px) {
+      margin-bottom: 14px;
+    }
+    &--name {
+      margin-bottom: 0;
+      @media (max-width: 575px) {
+        margin-bottom: 0;
+      }
+    }
+  }
+  &__textarea {
+    margin-top: 22px;
+    textarea {
+      margin-top: -0.8rem;
+      height: 102px !important;
+      max-height: 102px !important;
+      min-height: 102px !important;
+    }
+    @media (max-width: 575px) {
+      margin-top: 35px !important;
+    }
+  }
+  &__stars {
+    display: flex;
+    align-items: center;
+    mat-icon {
+      width: 19px !important;
+      height: 18px !important;
+      cursor: pointer;
+      margin-right: 4px;
+    }
+  }
+  &__close {
+    position: absolute;
+    right: -10px;
+    top: 0;
+    @media (max-width: 575px) {
+      top: -10px;
+    }
+    mat-icon {
+      width: 11px;
+      height: auto;
+      fill: $minor-color;
+    }
+  }
+}
+
+.star {
+  fill: $primary-color;
+}
+
+.star-active {
+  fill: rgba($minor-color, 0.2);
+}
+
+/* btn styles */
+.btn-primary {
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  color: $icon-color !important;
+  padding: 0 24px;
+  height: 38px;
+  border-radius: 4px;
+  background-color: $primary-color;
+  transition: 0.2s;
+  &:hover {
+    background-color: rgba($primary-color, 0.8);
+  }
+  &:disabled {
+    background-color: rgba($primary-color, 0.4);
+  }
+}

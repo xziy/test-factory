@@ -1,0 +1,13 @@
+<div class="flexDelimeter px-4 py-4" [class]="data.isError ? ' error-snack' : 'success-snack'">
+  <div class="message-block">
+    <p class="page-name" style="word-break: break-all;" *ngIf="data.additionText">
+      {{data.additionText}}
+    </p>
+    <p class="page-text" style="word-break: break-all;" *ngFor="let item of messageParagraph;trackBy:trackByFn">
+      {{item}}
+    </p>
+  </div>
+  <button mat-icon-button (click)="data.preClose()">
+    <mat-icon svgIcon="app-close"></mat-icon>
+  </button>
+</div>

@@ -1,0 +1,106 @@
+{
+  "unit": "layout1",
+  "description": "Шаверма на черной речке\n(без изменения цвета в компонентах)",
+  "snippets": {
+    "head": [
+      "<title>Проверка работы снипетов</title>"
+    ],
+    "bodyTop": [],
+    "bodyBottom": []
+  },
+  "constant": {
+    "cssVariables": {
+      "primary-color": "#232E2D",
+      "secondary-color": "#B6B069",
+      "minor-color": "#CBC57D",
+      "primary-text-color": "#DDF0F0",
+      "secondary-text-color": "#5F6473",
+      "icon-color": "#B6B069",
+      "global-border-radius-factor": "2px",
+      "rating-color": "#EB8D00",
+      "background": "top / cover no-repeat url(\"https://www.factroom.ru/wp-content/uploads/2019/04/5-osobennostej-klimata-pitera-o-kotoryh-vy-dolzhny-znat-esli-sobiraetes-syuda-priekhat-1250x833.jpg\") #000 fixed;"
+    },
+    "states": {
+      "hiddenPromotions": true
+    }
+  },
+  "inventory": {
+    "cart": {
+      "unit": "cart1",
+      "constant": {
+        "cssVariables": {}
+      }
+    },
+    "cart-panel": {
+      "unit": "cart-panel1",
+      "constant": {
+        "cssVariables": {}
+      }
+    },
+    "checkout": {
+      "unit": "checkout2",
+      "constant": {
+        "cssVariables": {}
+      }
+    },
+    "contacts": {
+      "unit": "contacts1",
+      "constant": {
+        "states": {},
+        "cssVariables": {}
+      }
+    },
+    "dish-modal": {
+      "unit": "dish-modal1",
+      "constant": {
+        "states": {},
+        "cssVariables": {}
+      }
+    },
+    "dish-nav-bar": {
+      "unit": "dish-nav-bar1",
+      "constant": {
+        "states": {},
+        "cssVariables": {}
+      }
+    },
+    "dishcard": {
+      "unit": "dishcard2",
+      "constant": {
+        "states": {},
+        "cssVariables": {}
+      },
+      "style": "foto-padding"
+    },
+    "footer": {
+      "unit": "footer1",
+      "constant": {
+        "states": {},
+        "cssVariables": {}
+      }
+    },
+    "header": {
+      "unit": "header1",
+      "constant": {
+        "cssVariables": {
+          "global-border-radius-factor": "4px"
+        },
+        "states": {}
+      },
+      "styles": "header-small-logo"
+    },
+    "promotions": {
+      "unit": "promotions1",
+      "constant": {
+        "states": {
+          "animation": "diffusion",
+          "autoplay": true
+        }
+      }
+    }
+  },
+  "environment": {
+    "backendLink": "https://32001.fwr.m42.cx/graphql",
+    "imageLink": "https://32001.fwr.m42.cx/"
+  }
+}

@@ -1,0 +1,20 @@
+<button mat-icon-button [matMenuTriggerFor]="info" class="info">
+  <mat-icon svgIcon="app-i"></mat-icon>
+</button>
+<mat-menu #info="matMenu" class="delivery-info" yPosition="above" [overlapTrigger]="false" [hasBackdrop]="true">
+  <ng-template matMenuContent>
+    <div class="calories-info">
+      <div class="calories-info__block">
+        <div class="calories-info__title" *ngIf="checkExists(dish.energyFullAmount)">{{dish.energyFullAmount
+          |number:'1.0-0'}} ккал</div>
+        <span *ngIf="checkExists(dish.carbohydrateFullAmount)">
+          {{dish.carbohydrateFullAmount |number:'1.0-0'}} г углеводы
+        </span>
+      </div>
+      <div class="calories-info__block">
+        <span *ngIf="checkExists(dish.fiberFullAmount)">{{dish.fiberFullAmount |number:'1.0-0'}} г белки</span>
+        <span *ngIf="checkExists(dish.fatFullAmount)">{{dish.fatFullAmount |number:'1.0-0'}} г жиры</span>
+      </div>
+    </div>
+  </ng-template>
+</mat-menu>

@@ -1,0 +1,36 @@
+unit:
+  version: 1
+  type: cart
+  author: webresto
+  name: cart
+  slug: cart1
+  description: Оформление заказа с доп.полями
+  group: cart
+  shareable: false
+  componentPrefix: cart.component
+  layout:
+    - base
+    - mobile
+component:
+  constant:
+    cssVariables:
+      - key: primary-color
+        value: $primary-color
+        description: " "
+        name: primary-color
+      - key: secondary-color
+        value: $secondary-color
+        description: " "
+        name: secondary-color
+      - key: primary-text-color
+        value: $secondary-text-color
+        description: " "
+        name: primary-text-color
+      - key: secondary-text-color
+        value: $primary-text-color
+        description: " "
+        name: secondary-text-color
+      - key: icon-color
+        value: $minor-color
+        description: " "
+        name: icon-color

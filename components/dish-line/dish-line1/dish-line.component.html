@@ -1,0 +1,58 @@
+<div class="dish-line-container" [class]="panelMode ? ' alternateLine' : ''" *ngIf="dish">
+  <div class="cart-item" [ngSwitch]="controlType">
+    <div class="cart-item__group" *ngSwitchCase="'radio'" [formGroup]="modifierForm!">
+      <mat-radio-group aria-label="Select an option" color="primary" formControlName="amount"
+        (change)="selectModifier()">
+        <mat-radio-button color="primary" [value]="1"></mat-radio-button>
+      </mat-radio-group>
+      <div class="page-name">{{dish.price | wrstCurrency}}</div>
+    </div>
+    <div class="cart-item__group cart-item__group--checkbox" *ngSwitchCase="'checkbox'">
+      <mat-checkbox color="primary" class="page-text" [checked]="modifierForm?.value.amount === 1"
+        (change)="editModifier(smallCheckbox.checked ? 1: 0)" #smallCheckbox>
+        {{dish.name}} <span>{{dish.price | wrstCurrency}}</span>
+      </mat-checkbox>
+    </div>
+    <ng-container *ngSwitchCase="'control'">
+      <div class="cart-item__left">
+        <div class="cart-item__foto" *ngIf="dishImageSrc() as imageSrc">
+          <img [src]="imageSrc" (error)="errImg()" alt="" loading='lazy' width="100%" height="100%">
+        </div>
+        <div class="cart-item__name">
+          <div class="cart-item__name-title">
+            <div class="page-text page-text--bold">{{dish.name}} </div>
+            <app-calories-info [dish]="dish" *ngIf="canShowCaloriesInfo"></app-calories-info>
+          </div>
+          <div class="page-text page-text--weight"
+            *ngIf="config.showWeight && !panelMode && iHaveWeight; else panelPrice">
+            {{dish.weight | webrestoWeight:config.showWeight}}</div>
+          <ng-template #panelPrice>
+            <div class="cart-item__modal">
+              <div *ngIf="config.showWeight && iHaveWeight" class="cart-item__modal-text">
+                {{dish.weight |webrestoWeight:config.showWeight}}
+              </div>
+              <div class="cart-item__modal-text">{{(cartDish?.itemTotal ?? dish.price) |wrstCurrency}}</div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+      <div class="cart-item__right">
+        <app-dish-control *ngIf="!iAmBigCheckboxControl;else bigCheckbox" class="cart-modal__dish-control"
+          [modifierForm]="modifierForm" [dish]="dish" [amount]="amount" [cartDish]="cartDish" [panelMode]="panelMode"
+          (editModifier)="editModifier($event)" [isLoading]="isLoading" (openDishModal)="openModal()">
+        </app-dish-control>
+        <ng-template #bigCheckbox>
+          <mat-checkbox color="primary" class="page-text" [checked]="modifierForm?.value.amount === 1"
+            (change)="editModifier(bigCheckbox.checked ? 1: 0)" #bigCheckbox><span>{{dish.price | wrstCurrency}}</span>
+          </mat-checkbox>
+        </ng-template>
+      </div>
+    </ng-container>
+  </div>
+  <ng-container *ngIf="!!cartDish">
+    <div *ngIf="!panelMode" class="cart__full-price">{{cartDish.itemTotal |wrstCurrency}}</div>
+    <button mat-icon-button class="cart__close" *ngIf="order$ |async as cart" (click)="removeFromCart()">
+      <mat-icon svgIcon="app-close"></mat-icon>
+    </button>
+  </ng-container>
+</div>

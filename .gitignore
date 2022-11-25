@@ -1,0 +1,7 @@
+.vscode
+.CI_ENV
+*.zip
+*.tar.gz
+*.tar
+*.tar.xz
+project/src/environments/environment.json

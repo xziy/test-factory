@@ -1,0 +1,64 @@
+<div class="cart dark-theme" *ngIf="cartForm$ |async as orderForm">
+  <div class="cart__inner">
+    <div class="cart__title">Корзина</div>
+    <div class="cart__content" *ngIf="(cartDishes$ |async)?.length !== 0; else emptyCart">
+      <div class="cart__item" *ngFor="let item of cartDishes$ |async;trackBy:trackByFn">
+        <app-dish-line [dish]="item.dish" [panelMode]="true" [isLoading]="item.isLoading" [amount]="item.amount"
+          [cartDish]="item" class="is-fullwidth" (openDishModal)="openDishModal(item)">
+        </app-dish-line>
+      </div>
+      <div class="cart__total">
+        <div class="cart__wrap-inner">
+          <div class="cart__wrap">
+            <span>Заказ</span>
+            <span>{{orderForm.value.orderTotal | wrstCurrency}}</span>
+          </div>
+          <div class="cart__wrap">
+            <span>Доставка</span>
+            <span>{{orderForm.value.deliveryCost | wrstCurrency}}</span>
+          </div>
+          <div class="cart__wrap" *ngIf="orderForm.value.discountTotal">
+            <span>Скидка</span>
+            <span>{{orderForm.value.discountTotal | wrstCurrency}}</span>
+          </div>
+          <div class="cart__wrap">
+            <span>Итог</span>
+            <span>{{orderForm.value.total | wrstCurrency}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="cart__form" [formGroup]="orderForm" (change)="updateCartForm(orderForm.value)">
+        <div class="cart__form-wrap" formGroupName="customer">
+          <div class="cart__input-wrap">
+            <mat-form-field appearance="standard" color="accent" class="cart-form-field">
+              <mat-label>Имя и Фамилия</mat-label>
+              <input class="cart__input" matInput [matTooltip]="orderForm.value.name"
+                formControlName="name">
+              <mat-error *ngIf="getControlError(orderForm.controls.customer, 'name') as error ">{{error}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="cart__input-wrap">
+            <mat-form-field appearance="standard" color="accent" class="cart-form-field">
+              <mat-label>Ваш телефон</mat-label>
+              <span class="cart__prefix" matPrefix>+7 &nbsp;</span>
+              <input class="cart__input" matInput formControlName="phone" type="tel">
+              <mat-error *ngIf="getControlError(orderForm.controls.customer, 'phone') as error ">{{error}}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="cart__textarea">
+          <mat-form-field appearance="standard" color="accent" class="cart-form-field">
+            <mat-label>Комментарий к заказу</mat-label>
+            <textarea class="section-input__item" matInput cdkTextareaAutosize cdkAutosizeMinRows="2"
+              formControlName="comment"></textarea>
+          </mat-form-field>
+        </div>
+        <button mat-button class="btn-primary" routerLink="/checkout"
+          [disabled]="orderForm.controls.customer.invalid">Оформить заказ</button>
+      </div>
+    </div>
+    <ng-template #emptyCart>
+      <mat-label class="page-text">В вашей корзине ничего нет</mat-label>
+    </ng-template>
+  </div>
+</div>

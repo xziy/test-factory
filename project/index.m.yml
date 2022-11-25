@@ -1,0 +1,38 @@
+project:
+  version: 1
+  type: angular
+  constant:
+    assetsPath: "{$BUILD_PATH}/src/assets"
+    iconsPath: "{$BUILD_PATH}/src/app/material/icons.ts"
+    fontsPath: "{$BUILD_PATH}/src/styles/vars/font-family.scss"
+    componentsDestinationPath: "{$BUILD_PATH}/src/app/components"
+    environmentPath: "{$BUILD_PATH}/src/environments/environment.json"
+  environment:
+    - key: "backendLink"
+      required: true
+      name: "Backend link"
+      description: "Сылка для бека"
+      type: "string"
+    - key: "imageLink"
+      required: true
+      name: "Backend link"
+      description: "Сылка для картинок"
+      type: "string"
+  postActions:
+    - run: ts-config-build
+      filename: "{$COMPONENT_PATH}/config.json"
+    - run: scss-colors-build
+      filename: "{$COMPONENT_PATH}/colors.scss"
+  init:
+    - run: copy
+      src: "{$ROOT_PATH}/project"
+      dst: "{$BUILD_PATH}"
+    - run: bash
+      cmd: "npm install"
+  target:
+    serve:
+      - run: bash
+        cmd: "echo 'TODO: move serve command from hadrcode to this manifest'"
+    build:
+      - run: bash
+        cmd: ng build -c production

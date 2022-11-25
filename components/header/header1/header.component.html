@@ -1,0 +1,38 @@
+<header class="header">
+  <div class="header__inner">
+    <div class="header__wrap" [class]="config.positionNavigationMenu == 'right' ? 'wrap_right' : ''">
+      <div class="header__item">
+        <a class="header__logo" [routerLink]="(startMenuSlug$ |async)?.[0]" [fragment]="(startMenuSlug$ |async)?.[1]">
+          <img *ngIf="['logo-square','logo-square+logo-rectangle','logo-square+text'].includes(config.logo)"
+            class="logo-square" [src]="config.logoSquareLink" alt="">
+          <img *ngIf="['logo-rectangle','logo-square+logo-rectangle'].includes(config.logo)" class="logo-rectangle"
+            [src]="config.logoRectangleLink" alt="">
+          <h1 *ngIf="['logo-square+text','text'].includes(config.logo)" class="logo-title">{{
+            config?.textForTextHeaderLogo
+            || ''}}</h1>
+        </a>
+        <div class="header__info">
+          <a class="header__title" [href]="'tel:'+config.phoneNumber">{{config.phoneNumber}}</a>
+          <div class="header__subtitle">{{config.statusMessage}}</div>
+        </div>
+      </div>
+      <nav class="header__nav" *ngIf="config.visibleNavigationMenu">
+        <ng-container *ngFor="let point of navigationPoints$ |async; trackBy:trackByFn">
+          <a mat-button *ngIf="!isHttpLink(point.link);else outerLink" class="header__link" [routerLink]="point.link"
+            [disabled]="!point.active">{{point.label}}</a>
+          <ng-template #outerLink>
+            <a mat-button class="header__link" [href]="point.link" target="_blank"
+              [disabled]="!point.active">{{point.label}}</a>
+          </ng-template>
+        </ng-container>
+      </nav>
+    </div>
+    <div class="header__user" *ngIf="config.visibleCartButton || config.visibleLoginButton">
+      <app-cart-button *ngIf="showCartButton$ |async" [cart]="order$ |async"></app-cart-button>
+      <button mat-stroked-button class="header__account" *ngIf="config.visibleLoginButton">
+        <mat-icon svgIcon="app-user"></mat-icon>Войти
+      </button>
+    </div>
+    <ng-content></ng-content>
+  </div>
+</header>

@@ -1,0 +1,9 @@
+{
+  "autoplay": true,
+  "dots": true,
+  "showNavigationButton": true,
+  "rtl": false,
+  "loop": true,
+  "animation": "diffusion",
+  "horizontalPadding": "20"
+}

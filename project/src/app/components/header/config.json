@@ -1,0 +1,12 @@
+{
+  "visibleNavigationMenu": true,
+  "visibleCartButton": true,
+  "visibleLoginButton": true,
+  "positionNavigationMenu": "left",
+  "logo": "logo-square+logo-rectangle",
+  "logoSquareLink": "assets/img/header/logo.svg",
+  "logoRectangleLink": "assets/img/header/logoRectangle.png",
+  "textForTextHeaderLogo": "Easy food...:)",
+  "phoneNumber": "+7954125879",
+  "statusMessage": "ok"
+}

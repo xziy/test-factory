@@ -1,0 +1,135 @@
+@import "./colors";
+
+.mat-ripple-element,
+.mat-form-field-ripple {
+  background-color: color($secondary-color, 0.87) !important;
+  .dark-theme & {
+    background-color: color($primary-color, 0.87) !important;
+  }
+}
+
+body {
+  overflow: hidden;
+  a,
+  button,
+  div,
+  span {
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  img {
+    animation: 0.4s ease-in 0s fadeInTop;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  animation: 0.4s ease-in 0s fadeInTop;
+  width: 100%;
+  max-width: 1344px;
+  @media (max-width: 1344px) {
+    max-width: 1152px;
+  }
+  @media (max-width: 1152px) {
+    max-width: 960px;
+  }
+  @media (max-width: 960px) {
+    max-width: 769px;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+button,
+a,
+.is-cursor-pointer {
+  cursor: pointer;
+}
+
+.page-text {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+div.owl-carousel.owl-theme {
+  .owl-dots {
+    .owl-dot {
+      &.active,
+      &:hover {
+        span {
+          background: $secondary-color;
+        }
+      }
+    }
+  }
+}
+
+.delivery-info.mat-menu-panel {
+  box-shadow: none;
+  background-color: unset;
+  overflow: unset;
+  margin-bottom: 0.5rem;
+  @media (max-width: 750px) {
+    margin-bottom: 0;
+  }
+}
+
+.mat-checkbox-layout {
+  display: flex !important;
+  .mat-checkbox-label {
+    word-break: break-word;
+    white-space: normal;
+  }
+  .mat-checkbox-inner-container {
+    margin: 0.25rem 0.5rem auto auto;
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.header__burger {
+  display: none;
+  align-items: center;
+  @media (max-width: 991px) {
+    display: flex;
+    justify-content: flex-end;
+    height: 62px;
+  }
+  @media (max-width: 630px) {
+    span {
+      margin-top: 10px;
+    }
+  }
+}
+
+mat-sidenav-container.mat-sidenav-container {
+  overflow: hidden;
+
+  mat-sidenav-content.mat-sidenav-content {
+    overflow-x: hidden;
+  }
+
+  &,
+  mat-sidenav-content.mat-sidenav-content {
+    height: 100%;
+    width: 100%;
+    scroll-behavior: smooth;
+  }
+}

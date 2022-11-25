@@ -1,0 +1,47 @@
+unit:
+  version: 1
+  type: dish-nav-bar
+  author: webresto
+  name: dish-nav-bar
+  slug: dish-nav-bar1
+  description: кароточка блюда где заголовок сверху
+  group: dish-nav-bar
+  shareable: true
+  componentPrefix: dish-nav-bar.component
+  layout:
+    - base
+component:
+  constant:
+    states: []
+    cssVariables:
+      - key: primary-color
+        value: $secondary-color
+        description: " "
+        name: primary-color
+      - key: secondary-color
+        value: $primary-color
+        description: " "
+        name: secondary-color
+      - key: primary-text-color
+        value: $primary-color
+        description: " "
+        name: primary-text-color
+      - key: secondary-text-color
+        value: $secondary-text-color
+        description: " "
+        name: secondary-text-color
+      - key: background-nav-bar-color
+        value: $background-nav-bar-color
+        description: " "
+        name: background-nav-bar-color
+      - key: global-border-radius-factor
+        value: $global-border-radius-factor
+        description: " "
+        name: global-border-radius-factor
+  styles:
+    - name: border
+      slug: border
+      description: " "
+    - name: no-border
+      slug: no-border
+      description: " "

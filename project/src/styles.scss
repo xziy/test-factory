@@ -1,0 +1,184 @@
+@use "sass:math";
+@use "sass:map";
+@use "@angular/material" as mat;
+@use "./styles/vars/helpers.sass";
+@import "./styles/vars/vars";
+@import "./app/components/layout/layout.component.scss";
+@import "ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css";
+@import "ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css";
+@import "~animate.css/animate.compat.css";
+
+@function tetrad($color) {
+  $hue: hue($color);
+  $saturation: saturation($color);
+  $lightness: lightness($color);
+  $tetrad: hsl($hue, $saturation, $lightness), hsl($hue + 90 % 360, $saturation, $lightness),
+    hsl($hue + 180 % 360, $saturation, $lightness), hsl($hue + 270 % 360, $saturation, $lightness);
+  @return $tetrad;
+}
+
+@function multiply($fore, $back) {
+  $red: math.div(red($back) * red($fore), 255);
+  $green: math.div(green($back) * green($fore), 255);
+  $blue: math.div(blue($back) * blue($fore), 255);
+  @return rgb($red, $green, $blue);
+}
+
+@function makeColorPalette($color) {
+  $light: #fff;
+  $dark: multiply($color, $color);
+  $tetrad: tetrad($color);
+  $palette: (
+    50: mix($light, $color, 88%),
+    100: mix($light, $color, 70%),
+    200: mix($light, $color, 50%),
+    300: mix($light, $color, 30%),
+    400: mix($light, $color, 15%),
+    500: mix($light, $color, 0%),
+    600: mix($dark, $color, 13%),
+    700: mix($dark, $color, 30%),
+    800: mix($dark, $color, 46%),
+    900: mix($dark, $color, 75%),
+    A100: lighten(saturate(mix($dark, $color, 15%), 80%), 45.6%),
+    A200: lighten(saturate(mix($dark, $color, 15%), 80%), 35.6%),
+    A400: lighten(saturate(mix($dark, $color, 15%), 100%), 25.6%),
+    A700: lighten(saturate(mix($dark, $color, 15%), 100%), 20.5%),
+    contrast: (
+      50: $primary-text-color,
+      100: $primary-text-color,
+      200: $primary-text-color,
+      300: $primary-text-color,
+      400: $primary-text-color,
+      500: $secondary-text-color,
+      600: $secondary-text-color,
+      700: $secondary-text-color,
+      800: $secondary-text-color,
+      900: $secondary-text-color,
+    ),
+  );
+  @return $palette;
+}
+
+$family: $font-main, system-ui, -apple-system, -apple-system-font, "Segoe UI";
+$typography-config: mat.define-typography-config(
+  $font-family: $family,
+);
+@include mat.core();
+
+$base-layout-primary: mat.define-palette(makeColorPalette($secondary-color));
+$base-layout-accent: mat.define-palette(makeColorPalette($primary-color));
+$base-layout-warn: mat.define-palette(mat.$red-palette);
+$base-layout-warn-dark: mat.define-palette(mat.$red-palette, 100);
+$base-layout-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $base-layout-primary,
+      accent: $base-layout-accent,
+      warn: $base-layout-warn,
+    ),
+    typography: $typography-config,
+  )
+);
+@include mat.all-component-themes($base-layout-theme);
+
+$base-layout-theme-dark: mat.define-dark-theme(
+  (
+    color: (
+      primary: $base-layout-primary,
+      accent: $base-layout-accent,
+      warn: $base-layout-warn-dark,
+    ),
+    is-dark: true,
+    typography: $typography-config,
+  )
+);
+
+.dark-theme {
+  @include mat.all-component-colors($base-layout-theme-dark);
+}
+
+.material-icons {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  letter-spacing: normal;
+  text-transform: none;
+  height: 1.5rem;
+  width: 1.5rem;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  color: currentColor;
+  fill: currentColor;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "liga";
+}
+
+.material-icons-outlined {
+  font-family: "Material Icons Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  letter-spacing: normal;
+  text-transform: none;
+  height: 1.5rem;
+  width: 1.5rem;
+  color: currentColor;
+  fill: currentColor;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "liga";
+}
+
+::-webkit-scrollbar,
+::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background-clip: padding-box;
+  border: 0.25rem solid transparent;
+  color: $secondary-color;
+}
+
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 0 1rem;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus,
+select:-webkit-autofill:active {
+  box-shadow: 0 0 0px 1000px transparent inset;
+  transition-property: background-color color;
+  transition: 5000s ease-in-out 0s;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: $family;
+  font-display: swap;
+  padding-top: env(safe-area-inset-top, 0);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  scroll-behavior: smooth;
+}

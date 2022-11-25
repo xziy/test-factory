@@ -1,0 +1,151 @@
+@import "./colors";
+
+:host {
+  background: $background-reviews-color;
+  padding-top: 2.5rem;
+  padding-bottom: 38px;
+  box-sizing: border-box;
+
+  @media (max-width: 578px) {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+}
+
+.reviews__arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  background: $icon-color;
+  box-shadow: 0px 4px 1.25rem rgba(0, 0, 0, 0.07);
+  border-radius: calc(#{$global-border-radius-factor} * 2.5);
+  transition: 0.2s;
+  @media (max-width: 991px) {
+    display: none;
+  }
+
+  mat-icon {
+    width: 0.5rem;
+    height: auto;
+    line-height: 0.5rem;
+    fill: $primary-color;
+    transition: 0.2s;
+  }
+}
+
+.reviews__title {
+  display: flex;
+  justify-content: space-between;
+
+  &.title-center {
+    justify-content: center;
+  }
+
+  @media (max-width: 578px) {
+    justify-content: center;
+  }
+}
+
+.reviews__content {
+  display: flex;
+  @media (max-width: 991px) {
+    width: 100%;
+  }
+}
+
+.reviews__nav {
+  display: flex;
+  width: 100%;
+}
+.reviews__arrows {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 72px;
+  @media (max-width: 768px) {
+    display: none;
+  }
+  mat-icon {
+    width: 1rem;
+    height: 1rem;
+    fill: $minor-color;
+    transition: 0.2s;
+    &:hover {
+      fill: $primary-color;
+    }
+  }
+}
+.reviews__btn {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 15px;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+  button {
+    width: 100%;
+    max-width: 144px;
+    height: 38px;
+    font-weight: 700;
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+    color: $primary-color;
+    border-radius: 4px;
+    border: 1px solid $primary-color;
+    transition: 0.2s;
+    &:disabled {
+      opacity: 0.4;
+    }
+  }
+}
+
+.reviews__star {
+  fill: rgba($minor-color, 0.2);
+}
+.reviews__star--orange {
+  fill: $amount-rate-stars-color;
+}
+
+.reviews__rating {
+  display: flex;
+  margin-top: 0.5rem;
+  @media (max-width: 578px) {
+    display: none;
+  }
+}
+.reviews__stars {
+  display: flex;
+  margin-left: 10px;
+  mat-icon {
+    width: 19px;
+    height: 18px;
+    margin-right: 4px;
+  }
+}
+
+.carousel {
+  box-sizing: border-box;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 81.25rem;
+}
+
+/* text styles */
+.page-title {
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 2.25rem;
+  color: $primary-text-color;
+  @media (max-width: 578px) {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    text-align: center;
+  }
+}
+
+.page-text {
+  color: $primary-text-color;
+}

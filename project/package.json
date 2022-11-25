@@ -1,0 +1,52 @@
+{
+  "name": "project",
+  "author": {
+    "name": "WebResto Team",
+    "url": "https://team.webresto.org/",
+    "email": "mail@webresto.org"
+  },
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://git.hm/webresto/factory/base_layouts/-/tree/staging"
+  },
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build -c production"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^13.3.0",
+    "@angular/cdk": "^13.3.0",
+    "@angular/common": "^13.3.0",
+    "@angular/compiler": "^13.3.0",
+    "@angular/core": "^13.3.0",
+    "@angular/forms": "^13.3.0",
+    "@angular/material": "^13.3.0",
+    "@angular/platform-browser": "^13.3.0",
+    "@angular/platform-browser-dynamic": "^13.3.0",
+    "@angular/router": "^13.3.0",
+    "@apollo/client": "^3.5.10",
+    "@axrl/ngx-extended-form-builder": "^1.0.9",
+    "@ngx-translate/core": "^14.0.0",
+    "@ngx-translate/http-loader": "^7.0.0",
+    "@webresto/ng-gql": "^1.1.25",
+    "@webresto/worktime": "^1.0.13",
+    "animate.css": "^4.1.1",
+    "apollo-angular": "^3.0.0",
+    "graphql": "^16.3.0",
+    "ngx-owl-carousel-o": "^7.0.2",
+    "rxjs": "^7.5.5",
+    "subscriptions-transport-ws": "^0.11.0",
+    "tslib": "^2.3.1",
+    "zone.js": "^0.11.5"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^13.3.0",
+    "@angular/cli": "^13.3.0",
+    "@angular/compiler-cli": "^13.3.0",
+    "@types/node": "^17.0.21",
+    "typescript": "^4.6.2"
+  }
+}

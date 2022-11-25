@@ -1,0 +1,20 @@
+<mat-sidenav-container (backdropClick)="drawer.close()">
+  <mat-sidenav class="is-fullwidth" #drawer fixedInViewport position="end" mode="over" [opened]="false"
+    autoFocus="dialog">
+    <app-burger-menu (closeBurger)="drawer.close()"></app-burger-menu>
+  </mat-sidenav>
+  <mat-sidenav-content id="sidenav-content">
+    <app-header *ngIf="!config.hiddenHeader" [enableCartPanel]="config.enableCartPanel">
+      <button mat-icon-button class="header__burger" (click)="drawer.open()">
+        <mat-icon svgIcon="app-burger"></mat-icon>
+      </button>
+    </app-header>
+    <app-promotions *ngIf="(isMenuPage$ |async) && !config.hiddenPromotions"></app-promotions>
+    <app-dish-nav-bar [class]="config.hiddenHeader ? 'no_header_navbar' : ''" *ngIf="!config.hiddenDishNavBar">
+    </app-dish-nav-bar>
+    <router-outlet></router-outlet>
+    <app-show-cookie *ngIf="(showCockieInfo$ |async)" [textAboutCookie]="config.textAboutCookie"
+      (close)="closeCockieInfo($event)"></app-show-cookie>
+    <app-footer *ngIf="!config.hiddenFooter"></app-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

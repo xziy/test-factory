@@ -1,0 +1,61 @@
+unit:
+  version: 1
+  type: dish-modal
+  author: webresto
+  name: dish-modal
+  slug: dish-modal1
+  description: кароточка блюда где заголовок сверху
+  group: dish-modal
+  shareable: true
+  componentPrefix: dish-modal.component
+  layout:
+    - base
+    - mobile
+component:
+  constant:
+    states:
+      - name: Компонент с закругленными углами
+        key: isRoundedDialog
+        default: false
+        description: >-
+          Требуется также задать global-border-radius-factor в блоке
+          cssVariables
+        type: boolean
+      - name: Использовать маленькие чекбоксы
+        key: useSmallCheckbox
+        default: true
+        description: >-
+          Если true - при выборе дополнительных ингридиентов будет
+          использоваться упрощенный чекбокс (без фото ингридиента и информации
+          об энергетической ценности). На десктопе и планшете в одном ряду может
+          быть до 3-х чекбоксов.
+
+          Если параметр отключен (false)  - внейшний вид контрола будет
+          идентичен стандартному, но вместо кнопок управления количеством
+          ингридиентов будет стоять чекбокс.  По умолчанию - true
+        type: boolean
+    cssVariables:
+      - key: primary-color
+        value: $primary-color
+        description: " "
+        name: primary-color
+      - key: secondary-color
+        value: $secondary-color
+        description: " "
+        name: secondary-color
+      - key: primary-text-color
+        value: $primary-text-color
+        description: " "
+        name: primary-text-color
+      - key: secondary-text-color
+        value: $secondary-text-color
+        description: " "
+        name: secondary-text-color
+      - key: icon-color
+        value: $secondary-color
+        description: " "
+        name: icon-color
+      - key: global-border-radius-factor
+        value: $global-border-radius-factor
+        description: " "
+        name: global-border-radius-factor

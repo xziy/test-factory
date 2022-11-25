@@ -1,0 +1,96 @@
+<div class="cart-section">
+  <div class="container" *ngIf="cartForm$ |async as orderForm" [formGroup]="orderForm"
+    (change)="updateCartForm(orderForm.value)">
+    <div class="cart-section__inner">
+      <div class="page-title">Корзина</div>
+      <div class="cart-section__content">
+        <div class="cart-section__item" *ngFor="let item of cartDishes$ |async;trackBy:trackByFn">
+          <div class="cart-section__top">
+            <app-dish-line class="cart-section__dish-line" [isLoading]="item.isLoading" [dish]="item.dish"
+              [amount]="item.amount" [cartDish]="item" (openDishModal)="openDishModal(item)"></app-dish-line>
+          </div>
+          <div class="info-section" *ngIf="item.modifiers.length > 0">
+            <div class="info-section__title">Дополнительные ингридиенты</div>
+            <div class="info-section__item" *ngFor="let modifier of item.modifiers;trackBy:trackByFn">
+              <span>{{modifier.dish?.name}}</span>
+              <span>{{modifier.dish?.price | wrstCurrency}}</span>
+              <span>{{modifier.amount}}шт</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-order">
+        <div class="section-order__header">
+          <div class="section-input section-input--promo">
+            <mat-form-field class="section-input__field" appearance="standard" color="primary" defaultColor="primary">
+              <mat-label>Промокод</mat-label>
+              <input class="section-input__item" matInput formControlName="promocode" placeholder="Введите промокод">
+              <button mat-button class="btn-primary" matSuffix>Применить</button>
+            </mat-form-field>
+          </div>
+          <div class="section-order__total">
+            <div class="section-order__item">
+              <div class="page-text page-text--gray">Заказ</div>
+              <div class="page-name">{{orderForm.value.orderTotal | wrstCurrency}}</div>
+            </div>
+            <div class="section-order__item">
+              <div class="page-text page-text--gray">Доставка</div>
+              <div class="page-name">{{orderForm.value.deliveryCost | wrstCurrency}}</div>
+            </div>
+            <div class="section-order__item" *ngIf="orderForm.value.discountTotal">
+              <div class="page-text page-text--gray">Скидка</div>
+              <div class="page-name">{{orderForm.value.discountTotal | wrstCurrency}}</div>
+            </div>
+            <div class="section-order__item">
+              <div class="page-text page-text--bold">Итог</div>
+              <div class="page-name">{{orderForm.value.total | wrstCurrency}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="section-order__footer">
+          <div class="section-order__field">
+            <div class="section-input__wrap" formGroupName="customer">
+              <div class="section-input">
+                <mat-form-field class="section-input__field" appearance="standard" color="primary"
+                  defaultColor="primary">
+                  <mat-label>Имя и Фамилия</mat-label>
+                  <input class="section-input__item" [matTooltip]="orderForm.value.name" formControlName="name"
+                    matInput>
+                  <mat-error *ngIf="getControlError(orderForm.controls.customer, 'name') as error ">{{error}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="section-input">
+                <mat-form-field class="section-input__field with-prefix" appearance="standard" color="primary"
+                  defaultColor="primary">
+                  <mat-label>Введите телефон</mat-label>
+                  <span matPrefix>+7 &nbsp;</span>
+                  <input class="section-input__item" matInput formControlName="phone" type="tel">
+                  <mat-error *ngIf="getControlError(orderForm.controls.customer, 'phone') as error ">{{error}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="section-input__wrap section-input__wrap--mb0">
+              <div class="section-input is-fullwidth">
+                <mat-form-field class="section-input__field is-fullwidth" appearance="standard" color="primary"
+                  defaultColor="primary">
+                  <mat-label>Комментарий к заказу</mat-label>
+                  <textarea class="section-input__item" matInput cdkTextareaAutosize cdkAutosizeMinRows="3"
+                    formControlName="comment"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="section-order__submit">
+            <div class="section-order__error" *ngIf="orderForm.value.deliveryDescription">
+              {{orderForm.value.deliveryDescription}}</div>
+            <button mat-button class="btn-primary section-order__btn" routerLink="/checkout"
+              [disabled]="(cartDishes$ |async)?.length === 0 || orderForm.controls.customer.invalid">Оформить
+              заказ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

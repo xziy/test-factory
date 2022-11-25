@@ -1,0 +1,20 @@
+<div class="contacts">
+  <div class="container">
+    <div class="contacts__inner">
+      <div class="contacts__text" *ngIf="isAboutPage$ |async">
+        <div class="contacts__title">{{config?.aboutTitle ?? ''}}</div>
+        <span>{{config?.aboutText ?? ''}}</span>
+      </div>
+      <div class="page-title">Карта</div>
+      <div class="contacts__content">
+        <div class="contacts__map">
+          <iframe allowfullscreen="false" loading="lazy" *ngIf="!!iframeLink" [src]="iframeLink"></iframe>
+        </div>
+        <div class="contacts__info">
+          <app-contacts-item [item]="item" *ngFor="let item of contactsItems; trackBy:trackByFn">
+          </app-contacts-item>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

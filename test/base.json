@@ -1,0 +1,72 @@
+{
+  "unit": "layout1",
+  "description": "Базовая сборка, все по макету\n(без изменения цвета в компонентах)",
+  "snippets": {
+    "head": [
+      "<title>Тестируем ...</title>"
+    ],
+    "bodyTop": [],
+    "bodyBottom": []
+  },
+  "constant": {
+    "cssVariables": {
+      "background-nav-bar-color": "#fafafa"
+    },
+    "states": {
+      "enableCartPanel": true
+    }
+  },
+  "inventory": {
+    "contacts": {
+      "unit": "contacts1",
+      "constant": {
+        "variables": {
+          "mail": " test@test.com",
+          "point": " г. Нижний Новгород ул. Молодговардейская 133",
+          "time": " Ежедневно 10:00 - 21:00",
+          "phone": " 8 (912) 345-67-89"
+        }
+      }
+    },
+    "dishcard": {
+      "unit": "dishcard2",
+      "constant": {},
+      "style": "foto-padding"
+    },
+    "footer": {
+      "unit": "footer1",
+      "constant": {}
+    },
+    "header": {
+      "unit": "header1",
+      "constant": {
+        "states": {
+          "logo": "logo-square+logo-rectangle",
+          "positionNavigationMenu": "right",
+          "visibleLoginButton": true,
+          "visibleCartButton": true
+        },
+        "variables": {
+          "logoSquareLink": "/assets/img/header/logo.svg",
+          "logoRectangleLink": "/assets/img/header/logoRectangle.png",
+          "textForTextHeaderLogo": "Easy food...:)",
+          "phoneNumber": "+7954125879",
+          "statusMessage": "ok"
+        }
+      }
+    },
+    "promotions": {
+      "unit": "promotions1",
+      "constant": {
+        "states": {
+          "animation": "diffusion",
+          "horizontalPadding": "10"
+        }
+      }
+    }
+  },
+  "environment": {
+    "backendLink": "https://32001.fwr.m42.cx/graphql",
+    "imageLink": "https://32001.fwr.m42.cx/"
+  }
+}

@@ -1,0 +1,72 @@
+unit:
+  version: 1
+  type: contacts
+  author: webresto
+  name: contacts
+  slug: contacts1
+  description: кароточка блюда где заголовок сверху
+  group: contacts
+  shareable: true
+  componentPrefix: contacts.component
+  layout:
+    - base
+component:
+  constant:
+    states: []
+    cssVariables:
+      - key: primary-color
+        value: $primary-color
+        description: " "
+        name: primary-color
+      - key: primary-text-color
+        value: $primary-text-color
+        description: " "
+        name: primary-text-color
+      - key: background-contacts-color
+        value: $background-contacts-color
+        description: " "
+        name: background-contacts-color
+      - key: icon-color
+        value: "#8252F4"
+        description: " "
+        name: icon-color
+    variables:
+      - name: Адрес предприятия
+        key: point
+        default: " "
+        description: Контактный почтовый адрес предприятия
+      - name: Телефон
+        key: phone
+        default: " "
+        description: Контактный телефон
+      - name: Режим работы
+        key: time
+        default: " "
+        description: Режим работы предприятия
+      - name: Email
+        key: mail
+        default: " "
+        description: Контактный e-mail
+      - name: Текст
+        key: aboutText
+        default: >-
+          Lorem Ipsum - это текст-"рыба", часто используемый в печати и
+          вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на
+          латинице с начала XVI века.
+        description: Основной текст, который будет отображаться на странице /about
+      - name: Заголовок
+        key: aboutTitle
+        default: The likely reason why and four ways Apple could improve
+        description: Заголовок для текста на странице с контактами предприятия
+      - name: Карта в <iframe>
+        key: iframeMapLink
+        default: >-
+          https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d75715.21190624624!2d-19.712338740904094!3d63.62310221249115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48d72470362206d1%3A0x65dae1daa9de1e38!2z0K3QudGP0YTRjNGP0LTQu9Cw0LnRkdC60Y7QtNC70Yw!5e0!3m2!1sru!2sru!4v1616076902020!5m2!1sru!2sru
+        description: Ссылка-источник на карту для элемента <iframe>
+  styles:
+    - name: contacts-horizontal
+      slug: contacts-horizontal
+      description: Горизонтальное расположение элементов
+    - name: contacts-vertical
+      slug: contacts-vertical
+      description: " Вертикальное расположение элементов"

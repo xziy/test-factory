@@ -1,0 +1,70 @@
+unit:
+  version: 1
+  type: dishcard
+  author: webresto
+  name: dishcard
+  slug: dishcard2
+  description: кароточка блюда где заголовок сверху
+  group: dishcard
+  shareable: true
+  componentPrefix: dishcard.component
+  layout:
+    - base
+    - mobile
+component:
+  styles:
+    - name: basic
+      slug: basic
+      description: " "
+    - name: foto-padding
+      slug: foto-padding
+      description: " "
+    - name: border
+      slug: border
+      description: " "
+    - name: border-background
+      slug: border-background
+      description: " "
+    - name: border-20
+      slug: border-20
+      description: " "
+  constant:
+    states:
+      - name: textAlign
+        key: textAlign
+        default: left
+        description: Выравнивание текста в карточке блюда
+        type: enum
+        enum:
+          - name: По левому краю
+            slug: left
+          - name: По правому краю
+            slug: right
+          - name: По центру
+            slug: centered
+    cssVariables:
+      - key: primary-color
+        value: $primary-color
+        description: " "
+        name: primary-color
+      - key: secondary-color
+        value: $secondary-color
+        description: " "
+        name: secondary-color
+      - key: minor-color
+        value: $minor-color
+        description: " "
+        name: minor-color
+      - key: primary-text-color
+        value: $primary-text-color
+        description: " "
+        name: primary-text-color
+      - key: secondary-text-color
+        value: $secondary-text-color
+        description: " "
+        name: secondary-text-color
+      - key: global-border-radius-factor
+        value: $global-border-radius-factor
+        description: " "
+        name: global-border-radius-factor
+    variables: []

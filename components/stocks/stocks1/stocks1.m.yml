@@ -1,0 +1,34 @@
+unit:
+  version: 1
+  type: stocks
+  author: webresto
+  name: stocks
+  slug: stocks1
+  description: Компонент с информацией о текущих акциях
+  group: stocks
+  componentPrefix: stocks.component
+  shareable: true
+  layout:
+    - base
+component:
+  constant:
+    states:
+      - name: Количество колонок
+        key: column_count
+        default: two
+        description: Размещать элементы в одну или три колонки
+        type: enum
+        enum:
+          - name: Одна колонка
+            slug: one
+          - name: Три колонки
+            slug: three
+    cssVariables:
+      - key: global-border-radius-factor
+        value: $global-border-radius-factor
+        description: " "
+        name: global-border-radius-factor
+      - key: background-stocks
+        value: $background-stocks
+        description: " "
+        name: background-stocks

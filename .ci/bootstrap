@@ -1,0 +1,68 @@
+#!/bin/bash
+
+
+# example: buildForDatamock 32001
+function buildForDatamock {
+  # stupid method, not check valid back
+  BUILD_IDENTY=$1;
+  BUILD_FILE=/app/layouts/base_layouts/test/$BUILD_IDENTY.json
+  cp /app/layouts/base_layouts/test/base.json $BUILD_FILE
+  jq '.environment.backendLink = "https://'$BUILD_IDENTY'.fwr.m42.cx/graphql"' $BUILD_FILE > $BUILD_FILE+"_" && mv $BUILD_FILE+"_" $BUILD_FILE
+  jq '.environment.imageLink = "https://'$BUILD_IDENTY'.fwr.m42.cx/"' $BUILD_FILE > $BUILD_FILE+"_" && mv $BUILD_FILE+"_" $BUILD_FILE
+  jq '.silent = true' $BUILD_FILE > $BUILD_FILE+"_" && mv $BUILD_FILE+"_" $BUILD_FILE
+  jq '.identy = "'$BUILD_IDENTY'"' $BUILD_FILE > $BUILD_FILE+"_" && mv $BUILD_FILE+"_" $BUILD_FILE
+  cat $BUILD_FILE
+  nohup curl -vX POST http://127.0.0.1:3000 -d @/app/layouts/base_layouts/test/$BUILD_IDENTY.json &
+}
+
+env_load () {
+  input=$1
+  while IFS= read -r line
+  do
+    IFS='=' read -r -a array <<< "$line"
+    export ${array[0]}="${array[1]}"
+  done < "$input"
+}
+
+echo "10.10.0.238 cdn.webresto.dev" >> /etc/hosts
+# mkdir -p /pnpm_store/yarn
+
+
+env_load  ./.CI_ENV
+set -x;
+
+
+DATETIME=`TZ='Europe/Moscow' date '+%Y-%m-%d_%H:%M'`
+LOG_FILE=builder-$DATETIME;
+
+mkdir -p /tmp/static/;
+ping fonts.googleapis.com -c 4
+ping 42.pub -c 4
+
+### send message to Chat
+message="<b>"$CI_PROJECT_NAME"</b> was updated🪁%0AAuthor: "$GITLAB_USER_LOGIN"%0ACommit: "$CI_COMMIT_SHORT_SHA"%0AMessage: "$CI_COMMIT_TITLE
+url="https://api.telegram.org/bot"$TG_APIKEY"/sendMessage"
+curl -s -d "chat_id=${TG_CHAT_ID}&text=$message&parse_mode=html&disable_web_page_preview=1" $url
+
+nginx
+
+nohup node /app/testing-web-server/server.js &
+sleep 10
+
+# build base layouts
+nohup curl -vX POST http://127.0.0.1:3000 -d @/app/layouts/base_layouts/test/base.json &
+
+
+# lazy build direct datamock frontend
+sleep 300
+
+for datamock in {1..15}
+do
+   echo "Build for 3200${datamock}.fwr.m42.cx backend"
+   buildForDatamock 3200${datamock}
+   sleep 350
+done
+
+
+# it here because kubernetes not can stop crashed containers
+sleep infinity

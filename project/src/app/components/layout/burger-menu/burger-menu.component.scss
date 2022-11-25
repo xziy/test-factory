@@ -1,0 +1,92 @@
+@import "../../header/colors";
+
+.header-menu {
+  display: flex;
+  flex-direction: column;
+  padding-top: 12px;
+  padding-left: 32px;
+  padding-right: 22px;
+  background-color: $background-header;
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    margin-top: 41px;
+    margin-bottom: 52px;
+  }
+  &__link {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: $primary-text-color;
+    white-space: pre-wrap;
+    margin-bottom: 32px;
+    transition: 0.2s;
+    text-align: left;
+    padding: 0;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &:hover {
+      background-color: rgba($secondary-color, 0.1);
+      color: $primary-text-color;
+    }
+  }
+  &__title {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: $primary-text-color;
+  }
+  &__subtitle {
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: $secondary-text-color;
+  }
+  &__logo {
+    display: flex;
+    align-items: center;
+  }
+  &__close {
+    margin-bottom: 5px;
+    mat-icon {
+      width: 11px;
+      height: auto;
+      fill: #191d32;
+    }
+  }
+}
+
+/* img styles */
+.logo-square {
+  width: 62px;
+  height: 62px;
+  object-fit: contain;
+  @media (max-width: 575px) {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.logo-rectangle {
+  object-fit: contain;
+  max-width: 270px;
+  height: 62px;
+  margin-left: 0.5rem;
+  @media (max-width: 575px) {
+    display: none;
+  }
+}
+
+.logo-title {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  color: $primary-text-color;
+  margin-left: 1.0625rem;
+}

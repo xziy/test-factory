@@ -1,0 +1,23 @@
+<div class="carousel" *ngIf="btnsData$ |async as btnsData" [style.width]="btnsData.containerWidth$ |async">
+  <owl-carousel-o [options]="btnsData.customOptions" (dragging)="dragEvent($event.dragging)">
+    <ng-template *ngFor="let slide of btnsData.btns;let i = index; trackBy:trackByFn" carouselSlide
+      [id]="slide.link[1] || i.toString()" [width]="109">
+      <div class="slide">
+        <a [owlRouterLink]="slide.link[0]" [stopLink]="(isDragging$ |async)!" [routerLink]="slide.link[0]"
+          *ngIf="slide.link[1]; else noFragmentAnchor" [fragment]="slide.link[1]" (click)="moveCarousel(slide.link[1])"
+          [class]="slide.link[1] == (scroll$ |async) ? 'product-nav__btn--active' : ''" mat-button
+          class="product-nav__btn">
+          <span>{{slide.label}}</span>
+        </a>
+        <ng-template #noFragmentAnchor>
+          <a [owlRouterLink]="slide.link[0]" [routerLink]="slide.link[0]" [stopLink]="(isDragging$ |async)!"
+            (click)="moveCarousel(i)" routerLinkActive="product-nav__btn--active"
+            [routerLinkActiveOptions]="{fragment:'exact',paths: 'exact',queryParams: 'exact',matrixParams: 'exact'}"
+            mat-button class="product-nav__btn">
+            <span>{{slide.label}}</span>
+          </a>
+        </ng-template>
+      </div>
+    </ng-template>
+  </owl-carousel-o>
+</div>

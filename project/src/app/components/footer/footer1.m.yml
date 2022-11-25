@@ -1,0 +1,50 @@
+unit:
+  version: 1
+  type: footer
+  author: webresto
+  name: footer
+  slug: footer1
+  description: Футер содержит 2 файла с большим и маленьким логотипом
+  group: footer
+  shareable: true
+  componentPrefix: footer.component
+  layout:
+    - base
+component:
+  constant:
+    states: 
+      - default: false
+        description: Определяет, требуется ли использовать для логотипа маленькое изображение вместо большого.
+        key: smallLogo
+        name: Маленький логотип
+        type: boolean
+    cssVariables:
+      - key: primary-color
+        value: $minor-color
+        description: " "
+        name: primary-color
+      - key: secondary-color
+        value: $primary-color
+        description: " "
+        name: secondary-color
+      - key: icon-color
+        value: $primary-color
+        description: " "
+        name: icon-color
+      - key: primary-text-color
+        value: $primary-color
+        description: " "
+        name: primary-text-color
+      - key: secondary-text-color
+        value: $secondary-color
+        description: " "
+        name: secondary-text-color
+      - key: background-footer
+        value: $background-footer
+        description: " "
+        name: background-footer
+    variables:
+      - name: Логотип
+        key: logoLink
+        default: /assets/img/page-1/product/foto-1.png
+        description: Ссылка на картинку с логотипом

@@ -1,0 +1,77 @@
+@import "./colors";
+
+:host {
+  background: $background-nav-bar-color;
+  display: flex;
+  position: sticky;
+  justify-content: center;
+  align-items: center;
+  animation: 0.5s ease-in-out 0s fadeIn;
+  height: 62px;
+  width: 100%;
+  z-index: 2;
+  &:not(.no_header_navbar) {
+    top: 82px;
+    @media (max-width: 630px) {
+      top: 62px;
+    }
+  }
+
+  &.no_header_navbar {
+    top: 0;
+  }
+}
+
+.carousel {
+  height: 62px;
+  animation: 0.5s ease-in-out 0s fadeIn;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.slide {
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.product-nav__btn {
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 0.875rem;
+  color: $secondary-text-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 140px;
+  height: 34px;
+  white-space: normal;
+  word-break: break-word;
+  hyphens: auto;
+  text-overflow: ellipsis;
+  border-radius: calc(#{$global-border-radius-factor} * 2);
+  margin-right: 24px;
+  transition: 0.2s;
+  &:hover {
+    background-color: rgba($primary-color, 0.8);
+    color: $secondary-color;
+  }
+
+  &:disabled {
+    background-color: rgba($primary-color, 0.4);
+  }
+
+  &--active {
+    color: $primary-text-color;
+    background: $primary-color;
+    border-radius: calc(#{$global-border-radius-factor} * 2);
+    transition: 0.2s;
+    margin-right: 24px;
+    &:hover {
+      color: $secondary-color;
+      background: $primary-color;
+    }
+  }
+}

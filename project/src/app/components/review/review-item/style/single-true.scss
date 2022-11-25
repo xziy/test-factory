@@ -1,0 +1,118 @@
+@import "./colors";
+
+.reviews {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 15px;
+  padding-bottom: 10px;
+  &__item {
+    display: flex;
+
+    background: $primary-color;
+    border-radius: calc(#{$global-border-radius-factor} * 2.5);
+    width: 100%;
+    max-width: 800px;
+
+    padding: 3.125rem 2.5rem;
+    height: 232px;
+    box-shadow: 0px 4px 1.25rem rgba(0, 0, 0, 0.07);
+    box-sizing: border-box;
+    margin: 32px 32px 22px 32px;
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      top: -32px;
+      left: -39px;
+      overflow: visible;
+      background-image: url("../assets/img/icon-1.svg");
+      width: 58px;
+      height: 45px;
+      @media (max-width: 575px) {
+        content: none;
+      }
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: -32px;
+      right: -41px;
+      overflow: visible;
+      background-image: url("../assets/img/icon-2.svg");
+      width: 58px;
+      height: 45px;
+      @media (max-width: 575px) {
+        content: none;
+      }
+    }
+    @media (max-width: 991px) {
+      margin: 32px 52px 22px 52px;
+    }
+    @media (max-width: 768px) {
+      height: 100%;
+    }
+    @media (max-width: 575px) {
+      flex-direction: column;
+      padding: 1rem;
+      padding-bottom: 24px;
+      margin: 10px;
+
+      width: 100%;
+    }
+  }
+  &__content-text {
+    display: flex;
+    flex-direction: column;
+    padding-left: 38px;
+    @media (max-width: 575px) {
+      padding-left: 0;
+      margin-top: 35px;
+    }
+  }
+  &__stars {
+    display: flex;
+    margin-left: 10px;
+    mat-icon {
+      width: 19px;
+      height: 18px;
+      margin-right: 4px;
+    }
+  }
+  &__rating {
+    display: flex;
+    align-items: center;
+
+    margin-top: 0.5rem;
+
+    .rating {
+      &__global {
+        fill: rgba($secondary-text-color, 0.2);
+      }
+      &__global-active {
+        fill: $rating-color;
+      }
+      &__personal {
+        fill: $secondary-color;
+      }
+    }
+
+    @media (max-width: 575px) {
+      display: flex;
+    }
+  }
+}
+
+/* text styles */
+
+.page-name {
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  color: $primary-text-color;
+}
+
+.page-text {
+  color: $primary-text-color;
+}

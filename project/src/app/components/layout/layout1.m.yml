@@ -1,0 +1,249 @@
+unit:
+  version: 1
+  type: layout
+  author: Xziy
+  name: layout
+  slug: layout1
+  description: |
+    Шаблон два в ряд
+    в котором корзина справа прицеплена
+  group: base
+  componentPrefix: layout.component
+component:
+  constant:
+    cssVariables:
+      - key: primary-color
+        value: "#fafaff"
+        description: " "
+        name: primary-color
+      - key: secondary-color
+        value: "#8252F4"
+        description: " "
+        name: secondary-color
+      - key: minor-color
+        value: "#191D32"
+        description: " "
+        name: minor-color
+      - key: primary-text-color
+        value: "#191D32"
+        description: " "
+        name: primary-text-color
+      - key: secondary-text-color
+        value: "#707584"
+        description: " "
+        name: secondary-text-color
+      - key: icon-color
+        value: "#8252F4"
+        description: " "
+        name: icon-color
+      - key: global-border-radius-factor
+        value: 4px
+        description: " "
+        name: global-border-radius-factor
+      - key: rating-color
+        value: "#EB8D00"
+        description: " "
+        name: rating-color
+      - key: background
+        value: "#8252F4"
+        description: " "
+        name: background
+      - key: background-reviews-color
+        value: rgba(255, 255, 255, 0)
+        description: " "
+        name: background-reviews-color
+      - key: background-product-color
+        value: rgba(255, 255, 255, 0)
+        description: " "
+        name: background-product-color
+      - key: background-nav-bar-color
+        value: "#fafafa"
+        description: " "
+        name: background-nav-bar-color
+      - key: background-contacts-color
+        value: rgba(255, 255, 255, 0)
+        description: " "
+        name: background-contacts-color
+      - key: background-footer
+        value: "#191D32"
+        description: " "
+        name: background-footer
+      - key: background-product-color
+        value: rgba(255, 255, 255, 0)
+        description: " "
+        name: background-product-color
+      - key: background-stocks
+        value: rgba(255, 255, 255, 0)
+        description: " "
+        name: background-stocks
+      - key: background-order
+        value: rgba(255, 255, 255, 0)
+        description: " "
+        name: background-order
+    variables:
+      - name: textAboutCookie
+        key: textAboutCookie
+        default: Мы используем cookie, чтобы персонализировать ваш опыт с сaйтом.
+        description: Сообщение об использовании cookie при входе на сайт.
+    states:
+      - key: hiddenHeader
+        default: false
+        description: Отключить отображение header-а
+        name: hiddenHeader
+        type: boolean
+      - key: hiddenPromotions
+        default: false
+        description: Отключить отображение promotions-а
+        name: hiddenPromotions
+        type: boolean
+      - key: hiddenDishNavBar
+        default: false
+        description: Отключить отображение dish-nav-bar-а
+        name: hiddenDishNavBar
+        type: boolean
+      - key: hiddenReview
+        default: false
+        description: Отключить отображение review
+        name: hiddenReview
+        type: boolean
+      - key: hiddenContacts
+        default: false
+        description: Отключить отображение contacts
+        name: hiddenContacts
+        type: boolean
+      - key: hiddenFooter
+        default: false
+        description: Отключить отображение footer-а
+        name: hiddenFooter
+        type: boolean
+      - name: enableFastOrder
+        key: enableFastOrder
+        default: false
+        description: Включить функционал "быстрого заказа"
+        type: boolean
+      - name: enableCartPanel
+        key: enableCartPanel
+        default: false
+        description: >-
+          Включить отображение зафиксированной панели с корзиной на странице с
+          блюдами
+        type: boolean
+      - name: Выравнивание блюд
+        key: dishcardAlign
+        default: center
+        description: Выравнивание карточек блюд на странице меню
+        type: enum
+        enum:
+          - slug: right
+            name: Выравнивать по правой стороне
+          - slug: left
+            name: Выравнивать по левой стороне
+          - slug: center
+            name: Выравнивать по центру блока.
+  inventory:
+    cart:
+      type: cart
+      description: |
+        description will be here
+    checkout:
+      type: checkout
+      description: Страница оформления заказа
+    contacts:
+      type: contacts
+      description: Страница "Контакты"
+    dish-line:
+      type: dish-line
+      description: Контрол управления блюдом
+    dish-modal:
+      type: dish-modal
+      description: Компонент с диалоговым поп-ап окном для выбора дополнительных ингридиентов и просмотра подробных данных о блюде.
+    dish-nav-bar:
+      type: dish-nav-bar
+      description: Кнопки навигапции по категориям продукции в меню
+    dishcard:
+      type: dishcard
+      description: Карточка блюда
+    footer:
+      type: footer
+      description: "\"Подвал\" сайта"
+    header:
+      type: header
+      description: "\"Шапка\" сайта"
+    promotions:
+      type: promotions
+      description: Блок с баннером во всю ширину страницы
+    review:
+      type: review
+      description: Блок с отзывами посетителей
+    order:
+      type: order
+      description: Страница с информацией о сделанном заказе
+    stocks:
+      type: stocks
+      description: Компонент с информацией о текущих акциях
+    cart-panel:
+      type: cart-panel
+      description: >-
+        Компонент с панелькой корзины, зафиксирован слева от блюд на странице с
+        меню
+  iconSet:
+    - iconName: cart
+      description: Иконка корзины
+    - iconName: logo
+      description: Логотип
+    - iconName: app-vk
+      description: Иконка app-vk
+    - iconName: app-fb
+      description: Иконка app-fb
+    - iconName: app-user
+      description: Иконка app-user
+    - iconName: app-cart
+      description: Иконка app-cart
+    - iconName: app-facebook
+      description: Иконка app-facebook
+    - iconName: app-instagram
+      description: Иконка app-instagram
+    - iconName: app-i
+      description: Иконка app-i
+    - iconName: app-minus
+      description: Иконка app-minus
+    - iconName: app-plus
+      description: Иконка app-plus
+    - iconName: app-close
+      description: Иконка app-close
+    - iconName: app-mail
+      description: Иконка app-mail
+    - iconName: app-phone
+      description: Иконка app-phone
+    - iconName: app-point
+      description: Иконка app-point
+    - iconName: app-time
+      description: Иконка app-time
+    - iconName: app-star
+      description: Иконка app-star
+    - iconName: app-arrow-next
+      description: Иконка app-arrow-next
+    - iconName: app-arrow-prev
+      description: Иконка app-arrow-prev
+    - iconName: app-date
+      description: Иконка app-date
+    - iconName: app-burger
+      description: Иконка app-burger
+    - iconName: app-cookie
+      description: Иконка app-cookie
+    - iconName: app-search
+      description: Иконка-лупа для инпута поиска
+  availableFonts:
+    - name: Roboto
+      link: >-
+        https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap
+    - name: Montserrat
+      link: >-
+        https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap
+  fonts:
+    main:
+      default: Roboto
+      description: Основной шрифт
+    secondary:
+      default: Montserrat
+      description: Дополнительный шрифт

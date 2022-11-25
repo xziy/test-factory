@@ -1,0 +1,208 @@
+@import "./colors";
+
+:host {
+  display: block;
+  border-radius: calc(#{$global-border-radius-factor} * 2.5);
+}
+
+h3 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cart-modal {
+  display: flex;
+  flex-direction: column;
+  animation: 0.5s ease-in-out 0s flipInX;
+  width: 100%;
+  max-width: 688px;
+  position: relative;
+  &__header {
+    display: flex;
+
+    margin-bottom: 38px;
+    @media (max-width: 765px) {
+      flex-direction: column;
+    }
+  }
+  &__foto {
+    margin-right: 25px;
+    @media (max-width: 765px) {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
+    img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      @media (max-width: 765px) {
+        width: 280px;
+        height: 280px;
+      }
+    }
+  }
+  &__info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 384px;
+    min-height: 200px;
+    max-height: 200px;
+    @media (max-width: 765px) {
+      min-height: 100%;
+      max-height: 100%;
+      max-width: 100%;
+    }
+    .page-name {
+      margin-bottom: 0.5rem;
+    }
+  }
+  &__nav {
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+    @media (max-width: 765px) {
+      margin-top: 0;
+    }
+  }
+  &__form {
+    .page-name {
+      margin-bottom: 0.5rem;
+    }
+  }
+  &__total {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-end;
+
+    .page-name {
+      margin-right: 24px;
+      margin-bottom: 0;
+      @media (max-width: 765px) {
+        display: none;
+      }
+    }
+  }
+
+  &__options-secondary {
+    width: 100%;
+    margin-top: 24px;
+    margin-bottom: 43px;
+  }
+
+  &__btn {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: $secondary-color;
+    outline: none;
+    background: $primary-color;
+    margin: 0;
+    border: 2px solid $secondary-color;
+    padding: 0 25px;
+    height: 34px;
+    min-width: 116px;
+    &--active {
+      background: $secondary-color;
+      color: $primary-color;
+      border: 2px solid $primary-color;
+      padding: 0 25px;
+      height: 38px;
+    }
+    &:first-child {
+      border-top-left-radius: calc(#{$global-border-radius-factor} * 2.5);
+      border-bottom-left-radius: calc(#{$global-border-radius-factor} * 2.5);
+      border-top-right-radius: unset;
+      border-bottom-right-radius: unset;
+      border-right: unset;
+    }
+    &:last-child {
+      border-top-right-radius: calc(#{$global-border-radius-factor} * 2.5);
+      border-bottom-right-radius: calc(#{$global-border-radius-factor} * 2.5);
+      border-top-left-radius: unset;
+      border-bottom-left-radius: unset;
+      border-left: unset;
+    }
+  }
+  &__items {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  &__close {
+    mat-icon {
+      width: 11px;
+      height: auto;
+      color: $secondary-text-color;
+    }
+  }
+  app-calories-info {
+    display: none;
+  }
+}
+
+.modal-actions {
+  flex-direction: column;
+  align-items: flex-end;
+  mat-error {
+    &:first-child,
+    span:first-child {
+      font-weight: bolder;
+    }
+    &:last-of-type {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+/* text styles */
+.page-name {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  color: $primary-text-color;
+}
+
+.page-text {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: $secondary-text-color;
+  &--info {
+    color: $primary-text-color;
+    margin-top: 32px;
+    margin-bottom: 26px;
+  }
+}
+
+.btn-primary {
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  color: $primary-color;
+  padding: 0 21px;
+  height: 38px;
+  border-radius: 4px;
+  background-color: $secondary-color;
+  transition: 0.2s;
+  &:hover {
+    background-color: rgba($secondary-color, 0.8);
+  }
+  &:disabled {
+    background-color: rgba($secondary-color, 0.4);
+  }
+  span {
+    display: none;
+  }
+  @media (max-width: 765px) {
+    width: 100%;
+    span {
+      display: inline;
+    }
+  }
+}
+
+.one-third-width {
+  width: 50%;
+}

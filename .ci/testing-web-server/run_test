@@ -1,0 +1,127 @@
+#!/bin/bash
+if [ -z "$2" ]; then echo "Identy required"; exit 0; fi
+
+
+
+
+env_load () {
+  input=$1
+  while IFS= read -r line
+  do
+    IFS='=' read -r -a array <<< "$line"
+    export ${array[0]}="${array[1]}"
+  done < "$input"
+}
+
+env_load  /app/.CI_ENV
+
+
+set -x;
+if [ "$3" == "silent" ]; then SILENT_MODE=1; fi
+
+start=`date +%s`
+# $1 file; $2 identy 
+
+
+regex='(https?)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]'
+if [[ $1 =~ $regex ]]
+then 
+    file=/tmp/$2.json
+    rm -rf $file
+    curl $1 -o $file --insecure
+else
+    file=$1
+fi
+
+[ ! -f /etc/resolv.conf ] && exit 1
+
+
+RUNDIR=$PWD
+#top -b -n 1
+DATETIME=`TZ='Europe/Moscow' date '+%Y-%m-%d_%H:%M'`
+LOG_FILE=builder-$DATETIME;
+
+# send message to Chat
+
+url="https://api.telegram.org/bot"$TG_APIKEY"/sendMessage"
+filename=$(basename -- "$file")
+test_identy=$2
+
+mkdir -p /tmp/${test_identy}/
+LOG=/tmp/full.log
+
+# get description from test
+description=`jq .description -r $file`
+
+# set title CI
+COMMIT_TIME=`cd /app/layouts/base_layouts && git show -s --format=%ci HEAD`
+ACTUAL_REPO=$( echo "$COMMIT_TIME $CI_COMMIT_SHORT_SHA" | sed 's/ /|/g' )
+jq '.snippets.head = ["<title>'$ACTUAL_REPO'</title>"]' $file > $file+"_" && mv $file+"_" $file
+
+echo "$DATETIME >> ${test_identy} LOG:" > $LOG
+echo "<pre>" >> $LOG
+
+test_message="Начинаю сборку: "$2
+cat $file
+
+if [ -z "$SILENT_MODE" ]; then 
+  curl -s -d "chat_id=${TG_CHAT_ID}&text=$test_message&parse_mode=html&disable_web_page_preview=1" $url
+fi
+  
+
+
+/app/project_builder build --recipe=$file --components-library=/app/layouts --output=/tmp/${test_identy} 2>&1 |tee -a $LOG
+# /app/project_builder build --recipe=$file --components-library=/app/layouts --output=/tmp/${test_identy} --disable-target-actions 2>&1 |tee -a $LOG
+cd /tmp/${test_identy} 
+rm -rf /tmp/${test_identy}/node_modules
+ln -s /cache/node_modules /tmp/${test_identy}/
+ng build -c production 2>&1 | tee -a $LOG;
+echo "</pre>" >> $LOG
+
+DIST_PATH=/tmp/${test_identy}/dist/project
+
+cd $DIST_PATH
+cp $LOG .
+
+# MAKE SOURCES & ARCHIVE
+mkdir -p $DIST_PATH/!src
+rsync -av  /tmp/${test_identy}/ $DIST_PATH'/!src' --exclude node_modules --exclude dist --exclude componentsmv 2>&1 >/dev/null
+cd '/tmp/'${test_identy}'/dist/project/!src'
+cp $file ./recepie.json
+
+
+ARCHIVE_FAIL=""
+ARCHIVE=$DIST_PATH/archive.tar.gz
+tar -cvf $ARCHIVE . 2>&1 >/dev/null
+
+[ ! -f $ARCHIVE ] && ARCHIVE_FAIL="👎"
+
+# BACK TO DIST
+cd $DIST_PATH
+cp $file ./recepie.json
+
+
+
+commit_message="<i>Hash: "$CI_COMMIT_SHORT_SHA"%0AMessage: "$CI_COMMIT_TITLE"%0ATime: "$COMMIT_TIME"</i>%0A"
+test_message="<b>${test_identy}</b>:%0A${commit_message}%0A${description}%0A%0Ahttps://${test_identy}.42.pub%0A<a href='https://${test_identy}.42.pub/archive.tar.gz'>${ARCHIVE_FAIL}prj</a> | <a href='https://${test_identy}.42.pub/full.log'>log</a> |  <a href='https://${test_identy}.42.pub/recepie.json'>recepie</a> |  <a href='https://${test_identy}.42.pub/!src'>${ARCHIVE_FAIL}src</a>%0A"
+
+if [ ! -f ./index.html ]; then  
+  cp $LOG index.html
+  test_message=$test_message"status: <b>fail</b> 🐖💨 %0A"
+else  
+  test_message=$test_message"status: ok ✅ %0A"
+fi
+
+tar -cvf /tmp/${test_identy}.tar .  2>&1 >/dev/null
+curl -F token=$DEPLOY_TOKEN_42PUB  -F site=@"/tmp/${test_identy}.tar" https://42.pub/static_pages/upload.php --insecure
+
+finish=`date +%s`
+deltatime=$((finish - start))
+test_message=$test_message"%0Atime: "$deltatime" sec"
+
+
+if [ -z "$SILENT_MODE" ]; then 
+  curl -s -d "chat_id=${TG_CHAT_ID}&text=$test_message&parse_mode=html&disable_web_page_preview=1" $url
+fi
+
+
